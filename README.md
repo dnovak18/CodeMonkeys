@@ -4,7 +4,7 @@ Hey CodeMonkeys, for our first task please add your name to the list of Authors 
 
 --Authors--
 1. Dillon Novak
-2.
+2. Jeffrey Eicher
 3.
 4.
 5.
