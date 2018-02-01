@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:checkable="false"
+        android:icon="@drawable/if_barcode_363078"
+        android:title="@string/menu_scan"
+        android:visible="true"
+        android:onClick="scanClick"
+         />
+    <item
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/menu_search"
+        android:visible="true"
+        android:onClick="searchClick"
+        />
+    <item
+        android:icon="@drawable/ic_location_on_black_24dp"
+        android:title="@string/menu_map"
+        android:visible="true"
+        android:onClick="mapClick"
+        />
+    <item
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/menu_profile"
+        android:visible="true"
+        android:onClick="profileClick"
+        />
+</menu>
