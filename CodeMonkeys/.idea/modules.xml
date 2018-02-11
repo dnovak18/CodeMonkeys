@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CodeMonkeys.iml" filepath="$PROJECT_DIR$/CodeMonkeys.iml" />
-      <module fileurl="file://C:\Users\prath\Desktop\code1\CodeMonkeys\CodeMonkeys\CodeMonkeys.iml" filepath="C:\Users\prath\Desktop\code1\CodeMonkeys\CodeMonkeys\CodeMonkeys.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\prath\Desktop\code1\CodeMonkeys\CodeMonkeys\app\app.iml" filepath="C:\Users\prath\Desktop\code1\CodeMonkeys\CodeMonkeys\app\app.iml" />
     </modules>
   </component>
 </project>
