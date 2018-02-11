@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class SearchActivity extends Activity {
+    //THIS CLASS WILL BE DELETED AFTER WE GET SearchFragment up and running***********
     //Cursor c;
     DatabaseHelper myDbHelper;
     SQLiteDatabase sqLiteDatabase;
