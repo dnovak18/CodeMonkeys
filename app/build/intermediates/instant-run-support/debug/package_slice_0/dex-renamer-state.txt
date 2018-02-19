@@ -1,0 +1,4 @@
+#Sun Feb 18 21:51:15 CST 2018
+base.0=C\:\\Users\\Nick\\Documents\\GitHub\\Capstone\\CodeMonkeys\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+path.0=classes.dex
+renamed.0=classes.dex

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\Users\Nick\Documents\GitHub\Capstone\CodeMonkeys\app\src\main\assets"><file name="breweryDataBase.db" path="C:\Users\Nick\Documents\GitHub\Capstone\CodeMonkeys\app\src\main\assets\breweryDataBase.db"/></source><source path="C:\Users\Nick\Documents\GitHub\Capstone\CodeMonkeys\app\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="C:\Users\Nick\Documents\GitHub\Capstone\CodeMonkeys\app\src\debug\assets"/></dataSet></merger>

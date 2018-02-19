@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Sun Feb 18 21:51:03 CST 2018
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\Nick\\Documents\\GitHub\\Capstone\\CodeMonkeys\\app\\build\\intermediates\\assets\\debug
+0.path=breweryDataBase.db
+0.set=ASSET
+count=1
