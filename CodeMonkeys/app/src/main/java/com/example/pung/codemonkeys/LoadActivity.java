@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 public class LoadActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 4000;
+    private static int SPLASH_TIME_OUT = 2000;
     AnimationDrawable animation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

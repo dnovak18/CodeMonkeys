@@ -14,23 +14,25 @@ import android.widget.TextView;
  */
 
 public class CustomSwipe extends PagerAdapter  {
-    private int[] tutorial_image = {R.drawable.tutorial1,R.drawable.tutorial2,R.drawable.tutorial3};
+    private int[] tutorial_image = {R.drawable.tutorial1,R.drawable.tutorial2,R.drawable.tutorial3,R.drawable.tutorial4,R.drawable.tutorial5};
     private Context context;
     private LayoutInflater layoutInflater;
 
     public CustomSwipe(Context c) {
+
         context = c;
     }
 
     @Override
     public int getCount() {
+
         return tutorial_image.length;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = layoutInflater.inflate(R.layout.activity_tutorial,container,false);
+        View itemView = layoutInflater.inflate(R.layout.fragment_welcome,container,false);
         ImageView imageView= (ImageView) itemView.findViewById(R.id.tutorial_view);
         //TextView textView = (TextView) itemView.findViewById(R.id.viewPager);
         imageView.setImageResource(tutorial_image[position]);

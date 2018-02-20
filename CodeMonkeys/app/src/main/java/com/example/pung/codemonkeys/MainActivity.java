@@ -1,19 +1,16 @@
 package com.example.pung.codemonkeys;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.database.SQLException;
 import java.io.IOException;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
+LockableViewPager view;
 ViewPager viewPager;
 CustomSwipe customSwipe;
 DatabaseHelper myDbHelper;
@@ -26,7 +23,6 @@ DatabaseHelper myDbHelper;
         viewPager = (ViewPager)findViewById(R.id.viewPager);
         customSwipe = new CustomSwipe(this);
         viewPager.setAdapter(customSwipe);
-
         myDbHelper = new DatabaseHelper(MainActivity.this);
         try {
             myDbHelper.createDataBase();
@@ -41,10 +37,6 @@ DatabaseHelper myDbHelper;
 
     }
 
-   // public void getName(){
-   //     SQLiteDatabase db = myDbHelper.getWritableDatabase();
-   //     db.rawQuery();
-   // }
     public void scanClick(MenuItem item) {
         Intent scanClick = new Intent(MainActivity.this, MapsActivity.class);
         startActivity(scanClick);
@@ -53,8 +45,8 @@ DatabaseHelper myDbHelper;
 
 
     public void searchClick(MenuItem item) {
-        Intent searchClick = new Intent(MainActivity.this, SearchActivity.class);
-        startActivity(searchClick);
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  SearchFragment()).addToBackStack(null).commit();
+
     }
     public void mapClick(MenuItem item) {
         Intent mapClick = new Intent(MainActivity.this, MapsActivity.class);
@@ -62,12 +54,8 @@ DatabaseHelper myDbHelper;
     }
 
     public void profileClick(MenuItem item) {
-        Intent profileClick = new Intent(MainActivity.this, MapsActivity.class);
-        startActivity(profileClick);
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
     }
 
-    //protected void mapClick (View v){
-//        Intent mapClick = new Intent(MainActivity.this, MapsActivity.class);
-//        startActivity(mapClick);
-    //}
+
 }
