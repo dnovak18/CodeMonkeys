@@ -147,7 +147,7 @@ public abstract class PermissionUtils {
          *                       returned to the
          *                       {@link android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback}.
          * @param finishActivity Whether the calling Activity should be finished if the dialog is
-         *                       cancelled.
+         *                       cancelled.ff
          */
         public static RationaleDialog newInstance(int requestCode, boolean finishActivity) {
             Bundle arguments = new Bundle();
