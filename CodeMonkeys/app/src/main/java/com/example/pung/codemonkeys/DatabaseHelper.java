@@ -4,18 +4,17 @@ package com.example.pung.codemonkeys;
  * Created by prath on 2/6/2018.
  */
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+        import android.content.Context;
+        import android.database.Cursor;
+        import android.database.SQLException;
+        import android.database.sqlite.SQLiteDatabase;
+        import android.database.sqlite.SQLiteOpenHelper;
+        import android.util.Log;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+        import java.io.FileOutputStream;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.io.OutputStream;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -78,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
     }
 
     @Override
@@ -96,4 +96,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public Cursor rawQuery(String find, Object o) {
+        return myDataBase.rawQuery(find,null);
+    }
+
+    public Cursor rawQuery1(String breweryFind, Object o) {
+        return myDataBase.rawQuery(breweryFind, null);
+    }
 }

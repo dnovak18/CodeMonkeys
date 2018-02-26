@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scanClick(MenuItem item) {
-        Intent scanClick = new Intent(MainActivity.this, MapsActivity.class);
+        Intent scanClick = new Intent(MainActivity.this, ScanActivity.class);
         startActivity(scanClick);
     }
 

@@ -7,10 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,9 +57,6 @@ public class SearchResultsFragment extends Fragment {
         search = (ListView)view.findViewById(R.id.brewery_search_result_listView);
         adapter = new SearchListAdapter(getActivity().getApplicationContext(), mProductList);
         search.setAdapter(adapter);
-
-        ListView clickTextView = (ListView) view.findViewById(R.id.brewery_search_result_listView);
-        //Toast.makeText(getActivity().getApplicationContext(), "get string =" +clickTextView , Toast.LENGTH_SHORT).show();
 
 
         return view;
@@ -119,6 +113,8 @@ public class SearchResultsFragment extends Fragment {
 
         cursor.close();
     }
+
+
 
 
 

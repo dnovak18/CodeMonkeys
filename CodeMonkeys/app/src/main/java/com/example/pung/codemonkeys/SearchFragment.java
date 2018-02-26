@@ -88,4 +88,5 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
+
 }
