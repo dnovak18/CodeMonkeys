@@ -42,11 +42,11 @@ public class SearchListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(mContext, R.layout.search_result_layout, null);
-        TextView tvName = (TextView)v.findViewById(R.id.brewery_name_result_textView);
-        TextView tvPrice = (TextView)v.findViewById(R.id.brewery_address_result_textView);
+        TextView breweryName = (TextView)v.findViewById(R.id.brewery_name_result_textView);
+        TextView BreweryAddress = (TextView)v.findViewById(R.id.brewery_address_result_textView);
         //Set text for TextView
-        tvName.setText(mProductList.get(position).getName());
-        tvPrice.setText(String.valueOf(mProductList.get(position).getAddress()));
+        breweryName.setText(mProductList.get(position).getName());
+        BreweryAddress.setText(String.valueOf(mProductList.get(position).getAddress()));
 
         //Save product id to tag
         v.setTag(mProductList.get(position));
