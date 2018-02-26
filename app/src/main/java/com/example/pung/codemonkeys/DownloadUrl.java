@@ -12,6 +12,7 @@ import java.net.URL;
 /**
  * Created by navneet on 23/7/16.
  */
+//Downloads place data
 public class DownloadUrl {
 
     public String readUrl(String strUrl) throws IOException {
