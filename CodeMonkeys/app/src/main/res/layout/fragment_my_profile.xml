@@ -1,20 +1,59 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
+    android:layout_below="@+id/toolbar"
+    android:layout_above="@+id/bottomNavigationView"
     tools:context="com.example.pung.codemonkeys.MyProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:id="@+id/profileImageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="13dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_person_black_48dp" />
+
     <TextView
-        android:id="@+id/searchResultTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/ProfileNametextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:gravity="center"
-        android:paddingBottom="20dp"
-        android:text="My Profile"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="@color/colorOrange"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/profileImageView"
+        android:layout_toRightOf="@+id/profileImageView"
+        android:layout_centerHorizontal="true"
+        android:text="CodeMonkey" />
+
+    <TextView
+        android:id="@+id/BiotextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ProfileNametextView"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/profileImageView"
+        android:layout_toRightOf="@+id/profileImageView"
+        android:text="Monkey see monkey Drink!"
+        android:textColor="@color/colorBlack" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/BiotextView"
+        android:layout_alignStart="@+id/BiotextView"
+        android:layout_below="@+id/BiotextView"
+        android:layout_toRightOf="@+id/profileImageView"
+        android:text="Edit" />
 
 </RelativeLayout>

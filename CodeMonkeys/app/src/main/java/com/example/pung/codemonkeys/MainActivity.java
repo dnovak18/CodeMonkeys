@@ -7,22 +7,22 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.database.SQLException;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Button;
-
 import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
-LockableViewPager view;
-ViewPager viewPager;
-CustomSwipe customSwipe;
-DatabaseHelper myDbHelper;
+    ListView search;
+    ViewPager viewPager;
+    CustomSwipe customSwipe;
+    DatabaseHelper myDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+      
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,7 @@ DatabaseHelper myDbHelper;
     }
 
     public void scanClick(MenuItem item) {
-        Intent scanClick = new Intent(MainActivity.this, MapsActivity.class);
+        Intent scanClick = new Intent(MainActivity.this, ScanActivity.class);
         startActivity(scanClick);
     }
 
@@ -68,9 +68,7 @@ DatabaseHelper myDbHelper;
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
     }
 
-
-    public void onClick(View view) {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+    public void infoClick(View view) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
     }
 }
