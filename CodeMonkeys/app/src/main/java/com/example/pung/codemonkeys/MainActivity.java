@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.database.SQLException;
 import android.view.View;
 import android.widget.ListView;
-
+import android.widget.Button;
 import java.io.IOException;
 
 
@@ -22,7 +22,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+      
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         viewPager = (ViewPager)findViewById(R.id.viewPager);
         customSwipe = new CustomSwipe(this);
         viewPager.setAdapter(customSwipe);
