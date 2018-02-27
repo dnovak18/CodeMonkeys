@@ -14,7 +14,11 @@
         android:layout_above="@+id/bottomNavigationView"
         tools:context="com.example.pung.codemonkeys.MapsActivity" />
 
-
+        <Button
+            android:id="@+id/btnBreweries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nearby Breweries" />
 
 
     </RelativeLayout>
