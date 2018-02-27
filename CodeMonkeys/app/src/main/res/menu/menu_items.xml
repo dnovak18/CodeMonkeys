@@ -9,7 +9,7 @@
         android:title="@string/menu_scan"
         android:visible="true"
         android:onClick="scanClick"
-         />
+        />
     <item
         android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/menu_search"

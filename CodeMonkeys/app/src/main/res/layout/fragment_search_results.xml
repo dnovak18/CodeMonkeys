@@ -5,6 +5,7 @@
     android:background="@color/colorWhite"
     android:id="@+id/searchResult"
     android:paddingLeft="10dp"
+    android:layout_below="@+id/toolbar"
     android:layout_above="@+id/bottomNavigationView"
     android:paddingRight="10dp"
     android:paddingBottom="5dp"
