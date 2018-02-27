@@ -8,6 +8,9 @@
     <string name="code">Code</string>
     <string name="monkeys">Monkeys</string>
     <string name="loading_logo">loading_logo</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="button_text">Login</string>
+    <string name="button_text_2">Name =</string>
     <string name="todo">TODO</string>
 
     <!-- TODO: Remove or change this placeholder text -->

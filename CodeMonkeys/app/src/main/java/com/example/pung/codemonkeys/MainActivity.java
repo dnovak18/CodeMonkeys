@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.database.SQLException;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -23,6 +25,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //////////////////////////////////////////////////////
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Toast.makeText(MainActivity.this, "Access Denied = "+intent, Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            }
+        });
+///////////////////////////////////////////////////////////////////////
         viewPager = (ViewPager)findViewById(R.id.viewPager);
         customSwipe = new CustomSwipe(this);
         viewPager.setAdapter(customSwipe);
@@ -63,4 +77,12 @@ public class MainActivity extends AppCompatActivity {
     public void infoClick(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
     }
+
+    //////////////////////////////////////////////
+  //  public void onClick(View view) {
+   //     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+     //   startActivity(intent);
+
+ //   }
+
 }
