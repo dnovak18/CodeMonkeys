@@ -67,7 +67,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-//mport com.google.android.gms.common.internal.safeparcel.SafePareclable;
+//import com.google.android.gms.common.internal.safeparcel.SafePareclable;
 
 //public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
   //  public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -170,8 +170,8 @@ public class MapsActivity extends FragmentActivity implements
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         // Set the camera to the greatest possible zoom level that includes the
         // bounds
-      //  LatLngBounds MINNESOTA = new LatLngBounds(new LatLng(42.5, -97.9), new LatLng(51.1, -89.5));
-      //  mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(MINNESOTA, 10));
+      //LatLngBounds MINNESOTA = new LatLngBounds(new LatLng(42.5, -97.9), new LatLng(51.1, -89.5));
+      //mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(MINNESOTA, 15));
 
 
        // LatLng msp = new LatLng(44.95, -93.2);
@@ -208,7 +208,7 @@ public class MapsActivity extends FragmentActivity implements
             }
         });
 
-        //mMap.setOnMyLocationButtonClickListener(this);
+        //Maybe not necessary?
         mMap.setOnMyLocationClickListener(this);
         enableMyLocation();
 
@@ -261,11 +261,15 @@ public class MapsActivity extends FragmentActivity implements
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
 
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+
         googlePlacesUrl.append("location=" + latitude + "," + longitude);
-        googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
-        googlePlacesUrl.append("&type=" + nearbyPlace);
-        googlePlacesUrl.append("&sensor=true");
-        googlePlacesUrl.append("&key=" + "AIzaSyATuUiZUkEc_UgHuqsBJa1oqaODI-3mLs0");
+        //googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
+        googlePlacesUrl.append("&radius=" + 10000);
+        googlePlacesUrl.append("&keyword=" + "brewery");
+       // googlePlacesUrl.append("&type=" + nearbyPlace);
+        //googlePlacesUrl.append("&type=" + "brewery");
+        //googlePlacesUrl.append("&sensor=true");
+        googlePlacesUrl.append("&key=" + "AIzaSyA3R1xKAFLatmjQqUA1-dG4GPgMaZPOxcE");
         Log.d("getUrl", googlePlacesUrl.toString());
         return (googlePlacesUrl.toString());
     }
