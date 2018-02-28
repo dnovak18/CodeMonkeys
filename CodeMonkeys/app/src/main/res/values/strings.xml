@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">The Great Minnesota Drink Together</string>
     <string name="menu_scan">Scan</string>
     <string name="menu_search">Search</string>
     <string name="menu_map">Map</string>
