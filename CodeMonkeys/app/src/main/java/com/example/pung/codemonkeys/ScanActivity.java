@@ -129,31 +129,29 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         myDbHelper = new DatabaseHelper(ScanActivity.this);
         myDbHelper.openDataBase();
 //SQL statement
-        String find = "SELECT * FROM beer_table JOIN brewery_table ON beer_table.beer_ID = beer_table.beer_ID WHERE beer_barcode = " + result.toString();
 
+        //String find = "SELECT * FROM beer_table JOIN brewery_table ON beer_table.beer_ID = beer_table.beer_ID WHERE beer_barcode = " + result.toString();
+        String find = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip,beer_name,beer_type FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where beer_barcode = " + result.toString();
 
         Cursor cursor = myDbHelper.rawQuery(find, null);
-
 
         String beerName = null;
         String beerType = null;
         String brewery = null;
         String address = null;
-
-
         String city = null;
         String state = null;
         String zip = null;
 
         if(cursor.moveToFirst()) {
 
-            brewery = cursor.getString(7);
-            address = cursor.getString(8);
-            city = cursor.getString(9);
-            state = cursor.getString(10);
-            zip = cursor.getString(11);
-            beerName = cursor.getString(1);
-            beerType = cursor.getString(2);
+            brewery = cursor.getString(0);
+            address = cursor.getString(1);
+            city = cursor.getString(2);
+            state = cursor.getString(3);
+            zip = cursor.getString(4);
+            beerName = cursor.getString(5);
+            beerType = cursor.getString(6);
 
 
 
