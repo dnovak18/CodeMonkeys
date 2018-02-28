@@ -147,11 +147,11 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
         if(cursor.moveToFirst()) {
 
-            brewery = cursor.getString(6);
-            address = cursor.getString(7);
-            city = cursor.getString(8);
-            state = cursor.getString(9);
-            zip = cursor.getString(10);
+            brewery = cursor.getString(7);
+            address = cursor.getString(8);
+            city = cursor.getString(9);
+            state = cursor.getString(10);
+            zip = cursor.getString(11);
             beerName = cursor.getString(1);
             beerType = cursor.getString(2);
 
@@ -170,7 +170,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
         });
 //pop up message to display the results.
-        builder.setMessage("Brewery: "+ brewery + "\nAddress: "+ address + "\n" + city + ", " + state + "\n" + zip + "\nBeer: " + beerName + " \nType: " + beerType);
+        builder.setMessage("Bar code number: "+ result +"\nBrewery: "+ brewery + "\nAddress: "+ address + "\n" + city + ", " + state + " " + zip + "\nBeer Name: " + beerName + " \nBeer Type: " + beerType);
         AlertDialog alert1 = builder.create();
         alert1.show();
 
