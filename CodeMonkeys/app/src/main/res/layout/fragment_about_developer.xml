@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    android:layout_below="@+id/toolbar"
+    android:layout_below="@+id/tool_bar"
     android:layout_above="@+id/bottomNavigationView"
     tools:context="com.example.pung.codemonkeys.AboutDeveloperFragment">
 

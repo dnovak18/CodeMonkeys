@@ -8,25 +8,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.pung.codemonkeys.MainActivity">
 
-    <Button
 
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="@string/button_text"
-
-        />
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-
         android:background="#ffffa302"
-        android:minHeight="@android:dimen/notification_large_icon_height">
+        app:popupTheme="@style/NoOverlapPopup"
+        app:menu="@menu/setting_menu_items"
+        android:layout_alignParentTop="true"
+        android:id="@+id/tool_bar">
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -35,8 +25,8 @@
             android:layout_gravity="left"
             android:background="@null"
             android:clickable="true"
-            android:drawable="@drawable/ic_local_drink_white_24dp"
             android:onClick="infoClick"
+            android:drawable="@drawable/ic_local_drink_white_24dp"
             app:srcCompat="@drawable/ic_local_drink_white_48dp" />
 
         <TextView
@@ -53,6 +43,13 @@
 
     </android.support.v7.widget.Toolbar>
 
+
+
+
+
+
+
+
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -67,7 +64,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/tool_bar"
         android:layout_above="@+id/bottomNavigationView"
         android:layout_alignParentLeft="true"
         android:background="@color/colorWhite"

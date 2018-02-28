@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.database.SQLException;
 import android.view.View;
@@ -21,21 +24,51 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper myDbHelper;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.setting_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.login:
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.logout:
+                break;
+            case R.id.about:
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
+                break;
+            default:
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
 
         //////////////////////////////////////////////////////
+        /*
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                Toast.makeText(MainActivity.this, "Access Denied = "+intent, Toast.LENGTH_LONG).show();
+
                 startActivity(intent);
             }
         });
+*/
+
+
 ///////////////////////////////////////////////////////////////////////
         viewPager = (ViewPager)findViewById(R.id.viewPager);
         customSwipe = new CustomSwipe(this);
@@ -75,14 +108,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void infoClick(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
+        Toast.makeText(MainActivity.this, "Cheeeeers!", Toast.LENGTH_LONG).show();
+
     }
+    /////////////////////////////////////////////
+/*
+    public void onClick(View view) {
+        //Toast.makeText(MainActivity.this, "Access Denied = "+view, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
 
-    //////////////////////////////////////////////
-  //  public void onClick(View view) {
-   //     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-     //   startActivity(intent);
-
- //   }
-
+    }
+*/
 }
