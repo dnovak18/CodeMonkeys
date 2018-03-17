@@ -5,6 +5,8 @@
     android:background="@color/colorWhite"
     android:id="@+id/searchResult"
     android:paddingLeft="10dp"
+    android:layout_below="@+id/tool_bar"
+    android:layout_above="@+id/bottomNavigationView"
     android:paddingRight="10dp"
     android:paddingBottom="5dp"
     android:paddingTop="5dp"
@@ -32,7 +34,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:dividerHeight="10dp"
-        android:divider="#d1d1d1"></ListView>
+        android:divider="#d1d1d1">
+
+    </ListView>
 
 
 </LinearLayout>

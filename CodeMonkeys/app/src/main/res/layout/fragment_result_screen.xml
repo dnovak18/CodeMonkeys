@@ -1,13 +1,33 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:id="@+id/searchResult"
+    android:paddingLeft="10dp"
+    android:layout_below="@+id/tool_bar"
+    android:layout_above="@+id/bottomNavigationView"
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:orientation="vertical"><![CDATA[
     tools:context="com.example.pung.codemonkeys.ResultScreenFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    ]]>
+
+    <ListView
+        android:id="@+id/brewery_result_infoListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:divider="#d1d1d1"
+        android:dividerHeight="1dp"
+        android:headerDividersEnabled="false">
 
-</FrameLayout>
+    </ListView>
+
+
+</LinearLayout>

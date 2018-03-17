@@ -8,11 +8,53 @@
     android:layout_height="match_parent"
     tools:context="com.example.pung.codemonkeys.MainActivity">
 
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffa302"
+        app:popupTheme="@style/NoOverlapPopup"
+        app:menu="@menu/setting_menu_items"
+        android:layout_alignParentTop="true"
+        android:id="@+id/tool_bar">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="infoClick"
+            android:drawable="@drawable/ic_local_drink_white_24dp"
+            app:srcCompat="@drawable/ic_local_drink_white_48dp" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/imageButton"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:text="The Great Minnesota Drink Together"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+
+
+
+
+
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:background="#ffffa302"
         android:layout_alignParentBottom="true"
-
         app:menu="@menu/menu_items"
         android:id="@+id/bottomNavigationView">
 
@@ -22,10 +64,12 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar"
         android:layout_above="@+id/bottomNavigationView"
         android:layout_alignParentLeft="true"
         android:background="@color/colorWhite"
         android:layout_alignParentStart="true" />
+
 
 
 

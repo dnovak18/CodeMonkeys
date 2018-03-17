@@ -34,7 +34,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         setContentView(scannerView);
         int currentApiVersion = Build.VERSION.SDK_INT;
 
-        if (currentApiVersion >= Build.VERSION_CODES.M) {
+        if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
             if (checkPermission()) {
                 Toast.makeText(ScanActivity.this, "Permission Granted", Toast.LENGTH_LONG).show();
             } else {
@@ -59,7 +59,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
 
         int currentapiVersion = Build.VERSION.SDK_INT;
-        if(currentapiVersion >=android.os.Build.VERSION_CODES.M){
+        if(currentapiVersion >= Build.VERSION_CODES.KITKAT){
             if (checkPermission()) {
                 if (scannerView == null) {
                     scannerView = new ZXingScannerView(this);
@@ -129,49 +129,64 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         myDbHelper = new DatabaseHelper(ScanActivity.this);
         myDbHelper.openDataBase();
 //SQL statement
-        String find = "SELECT * FROM beer_table JOIN brewery_table ON beer_table.beer_ID = beer_table.beer_ID WHERE beer_barcode = " + result.toString();
 
+        //String find = "SELECT * FROM beer_table JOIN brewery_table ON beer_table.beer_ID = beer_table.beer_ID WHERE beer_barcode = " + result.toString();
+        String find = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip,beer_name,beer_type FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where beer_barcode = " + result.toString();
 
         Cursor cursor = myDbHelper.rawQuery(find, null);
-
 
         String beerName = null;
         String beerType = null;
         String brewery = null;
         String address = null;
-
-
         String city = null;
         String state = null;
         String zip = null;
 
         if(cursor.moveToFirst()) {
 
-            brewery = cursor.getString(6);
-            address = cursor.getString(7);
-            city = cursor.getString(8);
-            state = cursor.getString(9);
-            zip = cursor.getString(10);
-            beerName = cursor.getString(1);
-            beerType = cursor.getString(2);
-
-
+            brewery = cursor.getString(0);
+            address = cursor.getString(1);
+            city = cursor.getString(2);
+            state = cursor.getString(3);
+            zip = cursor.getString(4);
+            beerName = cursor.getString(5);
+            beerType = cursor.getString(6);
 
         }
+if(beerName != null) {
 
-//pop up after scan should return the query result
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                scannerView.resumeCameraPreview(ScanActivity.this);
-            }
+    ResultScreenFragment detailsFrag = new ResultScreenFragment();
 
-        }).setMessage("Brewery: " + brewery + "\nAddress: " + address + "\n" + city + ", " + state + "\n" + zip + "\nBeer: " + beerName + " \nType: " + beerType);
-//pop up message to display the results.
-        AlertDialog alert1 = builder.create();
-        alert1.show();
+    Bundle breweryInfoBundle = new Bundle();
 
+    breweryInfoBundle.putString(brewery, null);
+    breweryInfoBundle.putString(address, null);
+    breweryInfoBundle.putString(city, null);
+    breweryInfoBundle.putString(state, null);
+    breweryInfoBundle.putString(zip, null);
+    breweryInfoBundle.putString(beerName, null);
+    breweryInfoBundle.putString(beerType, null);
+
+
+    detailsFrag.setArguments(breweryInfoBundle);
+
+}else {
+//pop up after scan error if the beer is not in database
+     AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Uh Oh!!!");
+    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+     @Override
+    public void onClick(DialogInterface dialog, int which) {
+     scannerView.resumeCameraPreview(ScanActivity.this);
     }
+
+    });
+//pop up message to display the error.
+    builder.setMessage("Look's like this beer has not been entered in our database." + "\n\nSorry for the inconvenience");
+    AlertDialog alert1 = builder.create();
+    alert1.show();
+}
+    }
+
 }
