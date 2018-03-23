@@ -1,12 +1,22 @@
 package com.example.pung.codemonkeys;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -17,6 +27,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
+import org.w3c.dom.Text;
 
 
 /**
@@ -36,6 +50,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleApiClient googleApiClient;
     private SignInButton signInButton;
     private TextView Name, Email;
+    private ImageView profilePic;
+    private ConstraintLayout profile_Section;
+    private Button signOutButton;
+    private LinearLayout buttonSection;
 
     // TODO: Rename and change types of parameters
     private static int RC_SIGN_IN = 9001;
@@ -49,19 +67,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
-        //something is wrong with R.id.text_login
-        //Name = (TextView)findViewById(R.id.text_login);
+        profile_Section = (ConstraintLayout)findViewById(R.id.profileSection);
+//        buttonSection = (LinearLayout)findViewById(R.id.linearLayout2);
+        Name = (TextView)findViewById(R.id.profileName);
+        profilePic = (ImageView)findViewById(R.id.imageView3);
+        Email = (TextView)findViewById(R.id.userEmail);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
+                .requestEmail().build();
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        //The line after me breaks some code
-        //findViewById(R.id.sign_in_button).setOnClickListener(this);
-
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(this);
+        signOutButton = (Button)findViewById(R.id.logoutButton);
+        signOutButton.setOnClickListener(this);
+//        profile_Section.setVisibility(View.GONE);
 
     }
 
@@ -79,12 +99,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.sign_in_button:
                 signIn();
                 break;
+            case R.id.logoutButton:
+                signOut();
+                break;
         }
     }
+
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
+    private void signOut(){
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                updateUI(false);
+            }
+        });
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -93,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
+
         }
     }
     private void handleSignInResult(GoogleSignInResult result) {
@@ -100,14 +135,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             GoogleSignInAccount account = result.getSignInAccount();
             String name = account.getDisplayName();
             String email = account.getEmail();
-            String ack = "Login Success";
-            //something is wrong with R.id.text_login
-            //((TextView) findViewById(R.id.text_login)).setText(ack);
+            String imgURL = account.getPhotoUrl().toString();
+            Name.setText(name);
+            Email.setText(email);
+            Glide.with(this).load(imgURL).into(profilePic);
+            updateUI(true);
+
 
         }else {
-
+            //Coded to determine status code errors on connection
+//            int statusCode = result.getStatus().getStatusCode();
+//            Toast.makeText(this, "Generic ERROR CODE" + statusCode, Toast.LENGTH_LONG).show();
+            updateUI(false);
         }
 
+    }
+    private void updateUI(boolean isLogin){
+        if(isLogin){
+//            signInButton.setVisibility(View.GONE);
+//            profile_Section.setVisibility(View.VISIBLE);
+        }else{
+//            signInButton.setVisibility(View.VISIBLE);
+//            profile_Section.setVisibility(View.GONE);
+        }
     }
 
     @Override
