@@ -1,13 +1,17 @@
 package com.example.pung.codemonkeys;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +62,12 @@ public class SearchResultsFragment extends Fragment {
         adapter = new SearchListAdapter(getActivity().getApplicationContext(), mProductList);
         search.setAdapter(adapter);
 
-
         return view;
     }
+
+ //  public void test_result(View view){
+ //      Toast.makeText(getActivity(), "Access Denied", Toast.LENGTH_LONG).show();
+//   }
 
     public void getBreweryResult(){
         String breweryNameResult = null;

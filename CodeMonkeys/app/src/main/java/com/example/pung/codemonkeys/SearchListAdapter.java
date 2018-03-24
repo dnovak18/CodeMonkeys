@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -50,6 +51,14 @@ public class SearchListAdapter extends BaseAdapter {
         breweryAddress.setText(String.valueOf(mProductList.get(position).getAddress()));
         beerType.setText(String.valueOf(mProductList.get(position).getBeerType()));
         beerName.setText(String.valueOf(mProductList.get(position).getBeerName()));
+
+        breweryName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
+                Toast.makeText(mContext, "Access Denied", Toast.LENGTH_LONG).show();
+            }
+        });
 
         //Save product id to tag
         v.setTag(mProductList.get(position));
