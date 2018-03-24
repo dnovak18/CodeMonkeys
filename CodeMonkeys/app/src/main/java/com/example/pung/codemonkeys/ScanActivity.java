@@ -183,7 +183,7 @@ if(beerName != null) {
 
     });
 //pop up message to display the error.
-    builder.setMessage("Look's like this beer has not been entered in our database." + "\n\nSorry for the inconvenience");
+    builder.setMessage("Look's like something went wrong. Try again or another UPC" + "\n\nSorry for the inconvenience");
     AlertDialog alert1 = builder.create();
     alert1.show();
 }

@@ -106,9 +106,17 @@ public class SearchResultsFragment extends Fragment {
             if(!breweryCity.isEmpty()){
                 breweryCity = breweryCity.trim();
                 //if else city search created by Jeff. May need cleaning up but was the best way to get it to find saint paul in the database
-                if(breweryCity.startsWith("Saint") || breweryCity.startsWith("saint")) {
+                if(breweryCity.contentEquals("Saint") || breweryCity.contentEquals("saint")) {
 
-                    find+="brewery_city LIKE '%St. Paul%'";
+                    find += "brewery_city LIKE '%St.%'";
+
+                }else if(breweryCity.contains("Saint L")||breweryCity.contains("Saint l")||breweryCity.contains("saint L")||breweryCity.contains("saint l")) {
+
+                    find += "brewery_city LIKE '%St. Louis Park%'";
+
+                }else if(breweryCity.contains("Saint P")||breweryCity.contains("Saint p")||breweryCity.contains("Saint P")||breweryCity.contains("Saint p")){
+
+                    find += "brewery_city LIKE '%St. Paul%'";
 
                 }else{
 
