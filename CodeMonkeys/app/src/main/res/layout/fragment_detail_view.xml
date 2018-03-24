@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/brewery_name_detail_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Brewery Name"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/brewery_address_detail_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="41dp" />
+
+    <TextView
+        android:id="@+id/brewery_phone_detail_textView"
+        android:layout_width="67dp"
+        android:layout_height="23dp"
+        android:text="Phone"
+        android:textColor="@color/colorBlack"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="77dp" />
+
+    <TextView
+        android:id="@+id/brewery_email_detail_textView"
+        android:layout_width="67dp"
+        android:layout_height="23dp"
+        android:text="Email"
+        android:textColor="@android:color/holo_blue_light"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <TextView
+        android:id="@+id/brewery_website_detail_textView"
+        android:layout_width="67dp"
+        android:layout_height="23dp"
+        android:text="Website"
+        android:textColor="@color/colorBlack"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="364dp"
+        android:layout_height="184dp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="191dp" />
+
+    <ListView
+        android:id="@+id/beer_name_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="182dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+</android.support.constraint.ConstraintLayout>
