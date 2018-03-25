@@ -15,7 +15,8 @@
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/brewery_address_detail_textView"
@@ -25,7 +26,8 @@
         android:textColor="@color/colorBlack"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="41dp" />
+        tools:layout_editor_absoluteY="41dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/brewery_phone_detail_textView"
@@ -34,7 +36,8 @@
         android:text="Phone"
         android:textColor="@color/colorBlack"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="77dp" />
+        tools:layout_editor_absoluteY="77dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/brewery_email_detail_textView"
@@ -43,7 +46,8 @@
         android:text="Email"
         android:textColor="@android:color/holo_blue_light"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="100dp" />
+        tools:layout_editor_absoluteY="100dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/brewery_website_detail_textView"
@@ -52,20 +56,23 @@
         android:text="Website"
         android:textColor="@color/colorBlack"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="123dp" />
+        tools:layout_editor_absoluteY="123dp"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="364dp"
         android:layout_height="184dp"
         tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="191dp" />
+        tools:layout_editor_absoluteY="191dp"
+        tools:ignore="MissingConstraints" />
 
     <ListView
         android:id="@+id/beer_name_detail"
         android:layout_width="wrap_content"
         android:layout_height="182dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
