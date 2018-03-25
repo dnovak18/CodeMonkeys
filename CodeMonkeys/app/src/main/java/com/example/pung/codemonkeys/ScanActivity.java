@@ -185,7 +185,7 @@ if(beerName != null) {
 
 
 //cannot resolve the getActivity
-    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+    FragmentManager fragmentManager = this.getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
     DetailsFragment detailsFragment = new DetailsFragment();

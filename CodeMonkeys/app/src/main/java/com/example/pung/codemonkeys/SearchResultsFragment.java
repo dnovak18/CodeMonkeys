@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,10 +57,10 @@ public class SearchResultsFragment extends Fragment {
         myDbHelper.openDataBase();
         mProductList = new ArrayList<>();
 
-
+        FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
         getBreweryResult();
         search = (ListView)view.findViewById(R.id.brewery_search_result_listView);
-        adapter = new SearchListAdapter(getActivity().getApplicationContext(), mProductList);
+        adapter = new SearchListAdapter(getActivity().getApplicationContext(), mProductList,fragmentManager);
         search.setAdapter(adapter);
 
         return view;

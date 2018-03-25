@@ -1,6 +1,10 @@
 package com.example.pung.codemonkeys;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,12 +20,14 @@ public class SearchListAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<Search> mProductList;
+    private FragmentManager mFragmentManager;
 
     //Constructor
 
-    public SearchListAdapter(Context mContext, List<Search> mProductList) {
+    public SearchListAdapter(Context mContext, List<Search> mProductList,FragmentManager mFragmentManager) {
         this.mContext = mContext;
         this.mProductList = mProductList;
+        this.mFragmentManager = mFragmentManager;
     }
 
     @Override
@@ -56,7 +62,29 @@ public class SearchListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
-                Toast.makeText(mContext, "Access Denied", Toast.LENGTH_LONG).show();
+
+
+
+                //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
+                try {
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    DetailViewFragment detailViewFragment = new DetailViewFragment();
+                    fragmentTransaction.replace(R.id.activity_main, detailViewFragment);
+                    fragmentTransaction.commit();
+                   // Activity activity =(Activity) mContext;
+                   // FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
+                    Toast.makeText(mContext, "it worked", Toast.LENGTH_LONG).show();
+                } catch (ClassCastException e) {
+                    Toast.makeText(mContext, "nope", Toast.LENGTH_LONG).show();
+                }
+                //FragmentManager fragmentManager =  ((Activity) mContext).getFragmentManager();
+                //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+               // SearchFragment searchResultsFragment = new SearchFragment();
+                //searchResultsFragment.setArguments(bundle);
+
+               // fragmentTransaction.replace(R.id.activity_main, searchResultsFragment);
+                //fragmentTransaction.commit();
             }
         });
 

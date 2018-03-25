@@ -72,7 +72,7 @@ public class SearchFragment extends Fragment {
         breweryZip = (EditText) view.findViewById(R.id.breweryZipEditText);
         breweryCity = (EditText) view.findViewById(R.id.breweryCityEditText);
         beerType = (EditText) view.findViewById(R.id.beerTypeEditText);
-        beerName = (EditText) view.findViewById(R.id.beerNameEditText);
+    beerName = (EditText) view.findViewById(R.id.beerNameEditText);
 
         //autocomplete
         AutoCompleteTextView autoCompleteTextViewBreweryName = (AutoCompleteTextView)view.findViewById(R.id.breweryNameEditText);
