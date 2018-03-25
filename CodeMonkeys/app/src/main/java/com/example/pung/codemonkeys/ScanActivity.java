@@ -7,6 +7,8 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,13 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     private ZXingScannerView scannerView;
     private static int camID = Camera.CameraInfo.CAMERA_FACING_BACK;
     DatabaseHelper myDbHelper;
+    String breweryNameText;
+    String breweryAddressText;
+    String breweryZipText;
+    String breweryCityText;
+    String breweryStateText;
+    String beerTypeText;
+    String beerNameText;
 
 
     @Override
@@ -156,20 +165,34 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         }
 if(beerName != null) {
 
-    ResultScreenFragment detailsFrag = new ResultScreenFragment();
+    breweryNameText = brewery.toString();
+    breweryAddressText = address.toString();
+    breweryZipText = zip.toString();
+    breweryCityText = city.toString();
+    breweryStateText = state.toString();
+    beerTypeText = beerType.toString();
+    beerNameText = beerName.toString();
 
-    Bundle breweryInfoBundle = new Bundle();
+    Bundle detailsBundle = new Bundle();
 
-    breweryInfoBundle.putString(brewery, null);
-    breweryInfoBundle.putString(address, null);
-    breweryInfoBundle.putString(city, null);
-    breweryInfoBundle.putString(state, null);
-    breweryInfoBundle.putString(zip, null);
-    breweryInfoBundle.putString(beerName, null);
-    breweryInfoBundle.putString(beerType, null);
+    detailsBundle.putString("brewery", breweryNameText);
+    detailsBundle.putString("address", breweryAddressText);
+    detailsBundle.putString("city", breweryCityText);
+    detailsBundle.putString("state", breweryStateText);
+    detailsBundle.putString("zip", breweryZipText);
+    detailsBundle.putString("beerName", beerNameText);
+    detailsBundle.putString("beerType", beerTypeText);
 
 
-    detailsFrag.setArguments(breweryInfoBundle);
+//cannot resolve the getActivity
+    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+    DetailsFragment detailsFragment = new DetailsFragment();
+    detailsFragment.setArguments(detailsBundle);
+
+    fragmentTransaction.replace(R.id.activity_main, detailsFragment);
+    fragmentTransaction.commit();
 
 }else {
 //pop up after scan error if the beer is not in database
