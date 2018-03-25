@@ -18,7 +18,7 @@ public class DetailsListAdapter extends BaseAdapter{
 
     //Constructor
 
-    public DetailsListAdapter(Context mContext, List<Details> mProductList) {
+    public DetailsListAdapter(Context mContext, List<Details> detailProductList) {
         this.mContext = mContext;
         this.detailProductList = detailProductList;
     }
