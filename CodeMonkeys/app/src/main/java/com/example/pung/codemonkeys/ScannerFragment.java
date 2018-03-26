@@ -190,7 +190,7 @@ public class ScannerFragment extends Fragment implements ZXingScannerView.Result
             breweryWebsiteText = website.toString();
             //beerTypeText = beerType.toString();
             //beerNameText = beerName.toString();
-            Toast.makeText(getActivity(), breweryAddressText, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), breweryAddressText, Toast.LENGTH_LONG).show();
             DetailViewFragment detailsFragment = new DetailViewFragment();
 
             Bundle detailsBundle = new Bundle();
