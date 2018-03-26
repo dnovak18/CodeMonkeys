@@ -91,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scanClick(MenuItem item) {
-        Intent scanClick = new Intent(MainActivity.this, ScanActivity.class);
-        startActivity(scanClick);
+       // Intent scanClick = new Intent(MainActivity.this, ScanActivity.class);
+       // startActivity(scanClick);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ScannerFragment()).addToBackStack(null).commit();
     }
 
 
