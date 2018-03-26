@@ -1,21 +1,15 @@
 package com.example.pung.codemonkeys;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -224,6 +218,7 @@ if(brewery != null) {
 
 
 }else {
+            try{
 //pop up after scan error if the beer is not in database
      AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     builder.setTitle("Uh Oh!!!");
@@ -238,7 +233,9 @@ if(brewery != null) {
     builder.setMessage("Look's like something went wrong. Try again or another UPC" + "\n\nSorry for the inconvenience");
     AlertDialog alert1 = builder.create();
     alert1.show();
-}
+}catch (ClassCastException e) {
+        Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
+    }
     }
 
-}
+}}

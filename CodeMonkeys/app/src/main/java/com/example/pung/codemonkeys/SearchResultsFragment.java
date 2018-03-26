@@ -1,18 +1,14 @@
 package com.example.pung.codemonkeys;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,7 +143,12 @@ public class SearchResultsFragment extends Fragment {
                 }
             }
             if(!beerName.isEmpty()){
-                find+="beer_name LIKE '%"+beerName+"%'";
+                if(beerName.matches("Cat Fish'n")){
+
+                    find += "beer_name LIKE 'Cat Fish''n'";
+                }else {
+                    find += "beer_name LIKE '%'" + beerName + "%'";
+                }
                 if(count>1){
                     find+=" and ";
                     count--;

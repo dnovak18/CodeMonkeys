@@ -1,11 +1,9 @@
 package com.example.pung.codemonkeys;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.hardware.Camera;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -234,7 +232,7 @@ public class ScannerFragment extends Fragment implements ZXingScannerView.Result
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    scannerView.resumeCameraPreview((ZXingScannerView.ResultHandler) getActivity());
+                    scannerView.resumeCameraPreview(ScannerFragment.this);
                 }
 
             });
