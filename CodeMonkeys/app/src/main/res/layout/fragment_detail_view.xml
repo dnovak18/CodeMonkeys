@@ -24,6 +24,8 @@
         tools:layout_editor_absoluteY="0dp"
         tools:ignore="MissingConstraints" />
 
+
+
     <TextView
         android:id="@+id/brewery_address_detail_textView"
         android:layout_width="wrap_content"
@@ -40,11 +42,12 @@
         app:layout_constraintTop_toBottomOf="@+id/brewery_name_detail_textView"
         />
 
+
     <TextView
         android:id="@+id/brewery_phone_detail_textView"
         android:layout_width="67dp"
         android:layout_height="23dp"
-        android:text="Phone"
+        android:text="Phone: "
         android:textColor="@color/colorBlack"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="77dp"
@@ -52,30 +55,54 @@
         app:layout_constraintTop_toBottomOf="@+id/brewery_address_detail_textView"/>
 
     <TextView
+        android:id="@+id/brewery_phone_detail_textView_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/brewery_address_detail_textView"
+        app:layout_constraintLeft_toRightOf="@+id/brewery_phone_detail_textView"
+        android:text="TextView" />
+
+    <TextView
         android:id="@+id/brewery_email_detail_textView"
         android:layout_width="67dp"
         android:layout_height="23dp"
-        android:text="Email"
-        android:textColor="@android:color/holo_blue_light"
+        android:text="Email: "
+        android:textColor="@color/colorBlack"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="100dp"
         tools:ignore="MissingConstraints"
         app:layout_constraintTop_toBottomOf="@+id/brewery_phone_detail_textView"/>
 
     <TextView
+        android:id="@+id/brewery_email_detail_textView_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/brewery_phone_detail_textView"
+        app:layout_constraintLeft_toRightOf="@+id/brewery_email_detail_textView"
+        android:text="TextView" />
+
+    <TextView
         android:id="@+id/brewery_website_detail_textView"
         android:layout_width="67dp"
         android:layout_height="23dp"
-        android:text="Website"
+        android:text="Website: "
         android:textColor="@color/colorBlack"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="123dp"
         tools:ignore="MissingConstraints"
         app:layout_constraintTop_toBottomOf="@+id/brewery_email_detail_textView"/>
 
+    <TextView
+        android:id="@+id/brewery_website_detail_textView_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/brewery_email_detail_textView"
+        app:layout_constraintLeft_toRightOf="@+id/brewery_website_detail_textView"
+        android:text="TextView" />
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="364dp"
+        android:layout_width="match_parent"
         android:layout_height="184dp"
         tools:layout_editor_absoluteX="10dp"
         tools:layout_editor_absoluteY="191dp"

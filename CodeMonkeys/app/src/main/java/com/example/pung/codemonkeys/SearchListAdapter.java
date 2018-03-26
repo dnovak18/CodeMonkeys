@@ -2,6 +2,7 @@ package com.example.pung.codemonkeys;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -50,6 +51,9 @@ public class SearchListAdapter extends BaseAdapter {
         View v = View.inflate(mContext, R.layout.search_result_layout, null);
         TextView breweryName = (TextView)v.findViewById(R.id.brewery_name_result_textView);
         TextView breweryAddress = (TextView)v.findViewById(R.id.brewery_address_result_textView);
+        TextView breweryPhone = (TextView)v.findViewById(R.id.brewery_phone);
+        TextView breweryEmail = (TextView)v.findViewById(R.id.brewery_email);
+        TextView breweryWebsite = (TextView)v.findViewById(R.id.brewery_website);
         TextView beerType = (TextView)v.findViewById(R.id.beer_type);
         TextView beerName = (TextView)v.findViewById(R.id.beer_name);
         //Set text for TextView
@@ -58,6 +62,17 @@ public class SearchListAdapter extends BaseAdapter {
         beerType.setText(String.valueOf(mProductList.get(position).getBeerType()));
         beerName.setText(String.valueOf(mProductList.get(position).getBeerName()));
 
+        final Bundle bundle = new Bundle();
+        Toast.makeText(mContext, breweryPhone.getText().toString(), Toast.LENGTH_LONG).show();
+        bundle.putString("breweryName", breweryName.getText().toString());
+        bundle.putString("breweryAddress", breweryAddress.getText().toString());
+        bundle.putString("breweryPhone", breweryPhone.getText().toString());
+        bundle.putString("breweryEmail", breweryEmail.getText().toString());
+        bundle.putString("breweryWebsite", breweryWebsite.getText().toString());
+        //bundle.putString("breweryCity", breweryCityText);
+       // bundle.putString("beerType", beerTypeText);
+       // bundle.putString("beerName", beerNameText);
+
         breweryName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,13 +80,14 @@ public class SearchListAdapter extends BaseAdapter {
                 try {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     DetailViewFragment detailViewFragment = new DetailViewFragment();
+                    detailViewFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_main, detailViewFragment);
                     fragmentTransaction.commit();
 
                 } catch (ClassCastException e) {
                     Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_LONG).show();
                 }
-                
+
             }
         });
 
