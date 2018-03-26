@@ -63,12 +63,12 @@ public class SearchListAdapter extends BaseAdapter {
         beerName.setText(String.valueOf(mProductList.get(position).getBeerName()));
 
         final Bundle bundle = new Bundle();
-        //Toast.makeText(mContext, breweryPhone.getText().toString(), Toast.LENGTH_LONG).show();
+       // Toast.makeText(mContext, breweryPhone.getText().toString(), Toast.LENGTH_LONG).show();
         bundle.putString("breweryName", breweryName.getText().toString());
         bundle.putString("breweryAddress", breweryAddress.getText().toString());
-        bundle.putString("breweryPhone", breweryPhone.getText().toString());
-        bundle.putString("breweryEmail", breweryEmail.getText().toString());
-        bundle.putString("breweryWebsite", breweryWebsite.getText().toString());
+        bundle.putString("breweryPhone", String.valueOf(mProductList.get(position).getPhone()));
+        bundle.putString("breweryEmail", String.valueOf(mProductList.get(position).getEmail()));
+        bundle.putString("breweryWebsite", String.valueOf(mProductList.get(position).getWebsite()));
         //bundle.putString("breweryCity", breweryCityText);
        // bundle.putString("beerType", beerTypeText);
        // bundle.putString("beerName", beerNameText);

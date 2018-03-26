@@ -10,13 +10,21 @@ public class Search {
     private String address;
     private String beerType;
     private String beerName;
+    private String phone;
+    private String email;
+    private String website;
 
-    public Search(int id, String name, String address, String beerType, String beerName) {
+
+    public Search(int id, String name, String address, String beerType, String beerName, String phone, String email, String website) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.beerName = beerName;
         this.beerType = beerType;
+        this.phone = phone;
+        this.email = email;
+        this.website = website;
+
     }
 
     public String getName() {
@@ -37,6 +45,15 @@ public class Search {
     }
     public String getBeerName() {
         return beerName;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getWebsite() {
+        return website;
     }
 
 }

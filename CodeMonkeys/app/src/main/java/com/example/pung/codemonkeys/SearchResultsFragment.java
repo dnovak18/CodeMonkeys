@@ -75,6 +75,10 @@ public class SearchResultsFragment extends Fragment {
         String breweryAddress = null;
         String beerInfo = null;
         String beerNameResult = null;
+        String phoneResult = null;
+        String emailResult = null;
+        String websiteResult = null;
+
         String find;
         int count=0;
         if(!breweryName.isEmpty()){
@@ -94,9 +98,9 @@ public class SearchResultsFragment extends Fragment {
         }
 
         if(count==0){
-            find = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip, beer_type, beer_name FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID";
+            find = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip, beer_type, beer_name, brewery_phone, brewery_email, brewery_website FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID";
         }else{
-            find = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip, beer_type, beer_name FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where ";
+            find = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip, beer_type, beer_name, brewery_phone, brewery_email, brewery_website FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where ";
             if(!breweryName.isEmpty()){
                 find+="brewery_name LIKE '%"+breweryName+"%'";
                 if(count>1){
@@ -162,7 +166,10 @@ public class SearchResultsFragment extends Fragment {
             breweryAddress += " "+cursor.getString(4);
             beerInfo = "Beer Type: "+cursor.getString(5);
             beerNameResult = "Beer Name: "+cursor.getString(6);
-            mProductList.add(new Search(1,breweryNameResult, breweryAddress,beerInfo,beerNameResult));
+            phoneResult = cursor.getString(7);
+            emailResult = cursor.getString(8);
+            websiteResult = cursor.getString(9);
+            mProductList.add(new Search(1,breweryNameResult, breweryAddress, beerInfo, beerNameResult, phoneResult, emailResult, websiteResult));
 
             while(cursor.moveToNext()==true){
                 breweryNameResult = cursor.getString(0);
@@ -172,7 +179,10 @@ public class SearchResultsFragment extends Fragment {
                 breweryAddress += " "+cursor.getString(4);
                 beerInfo = "Beer Type: "+cursor.getString(5);
                 beerNameResult = "Beer Name: "+cursor.getString(6);
-                mProductList.add(new Search(1,breweryNameResult, breweryAddress,beerInfo,beerNameResult));
+                phoneResult = cursor.getString(7);
+                emailResult = cursor.getString(8);
+                websiteResult = cursor.getString(9);
+                mProductList.add(new Search(1,breweryNameResult, breweryAddress, beerInfo, beerNameResult, phoneResult, emailResult, websiteResult));
 
             }
 
