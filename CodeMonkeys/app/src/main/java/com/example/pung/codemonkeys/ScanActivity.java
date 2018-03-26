@@ -7,8 +7,7 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -173,6 +172,8 @@ if(beerName != null) {
     beerTypeText = beerType.toString();
     beerNameText = beerName.toString();
 
+    Fragment DetailsFragment = new Fragment();
+
     Bundle detailsBundle = new Bundle();
 
     detailsBundle.putString("brewery", breweryNameText);
@@ -183,16 +184,7 @@ if(beerName != null) {
     detailsBundle.putString("beerName", beerNameText);
     detailsBundle.putString("beerType", beerTypeText);
 
-
-//cannot resolve the getActivity
-    FragmentManager fragmentManager = this.getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-    DetailsFragment detailsFragment = new DetailsFragment();
-    detailsFragment.setArguments(detailsBundle);
-
-    fragmentTransaction.replace(R.id.activity_main, detailsFragment);
-    fragmentTransaction.commit();
+    DetailsFragment.setArguments(detailsBundle);
 
 }else {
 //pop up after scan error if the beer is not in database

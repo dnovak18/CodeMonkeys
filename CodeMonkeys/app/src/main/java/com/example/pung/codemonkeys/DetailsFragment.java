@@ -19,18 +19,12 @@ public class DetailsFragment extends Fragment {
     DetailsListAdapter adapter;
     List<Details> detailProductList;
     DatabaseHelper myDbHelper;
-    String brewery;
-    String address;
-    String zip;
-    String city;
-    String state;
-    String beerType;
     String beerName;
     String breweryNameResult;
     String breweryAddress;
-    String breweryCity;
-    String breweryState;
-    String breweryZip;
+    String City;
+    String State;
+    String Zip;
     String type;
 
 
@@ -47,13 +41,13 @@ public class DetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_detail_view, container, false);
-        Bundle detailsBundle = getArguments();
+       Bundle detailsBundle = new Bundle();
 
       breweryNameResult =  detailsBundle.getString("brewery");
       breweryAddress = detailsBundle.getString("address");
-      breweryCity = detailsBundle.getString("city");
-      breweryState = detailsBundle.getString("state");
-      breweryZip = detailsBundle.getString("zip");
+      City = detailsBundle.getString("city");
+      State = detailsBundle.getString("state");
+      Zip = detailsBundle.getString("zip");
       beerName = detailsBundle.getString("beerName");
       type = detailsBundle.getString("beerType");
 
@@ -61,11 +55,11 @@ public class DetailsFragment extends Fragment {
 
         myDbHelper = new DatabaseHelper(getContext());
         myDbHelper.openDataBase();
-        detailProductList = new ArrayList<Details>();
+        detailProductList = new ArrayList<>();
 
 
         getBreweryResult();
-        search = (ListView)view.findViewById(R.id.brewery_search_result_listView);
+        search = (ListView)view.findViewById(R.id.beer_name_detail);
         adapter = new DetailsListAdapter(getActivity().getApplicationContext(), detailProductList);
         search.setAdapter(adapter);
 
@@ -74,110 +68,24 @@ public class DetailsFragment extends Fragment {
     }
 
     public void getBreweryResult(){
-       String breweryNameResult = null;
-       String breweryAddress = null;
+       String breweryNameResult;
+       String breweryAddress;
+       String type;
+       String beerNameResult;
+       String beerABVResult;
+       String breweryPhone;
+       String breweryEmail;
+       String breweryWebsite;
+       String findDetails;
        String breweryCity = null;
        String breweryState = null;
        String breweryZip = null;
-       String type = null;
-       String beerNameResult = null;
-       String beerABVResult = null;
-       String breweryPhone = null;
-       String breweryEmail = null;
-       String breweryWebsite = null;
-       String findDetails;
 
-        int count=0;
-        if(!breweryNameResult.isEmpty()){
-            count++;
-        }
-        if(!breweryAddress.isEmpty()){
-            count++;
-        }
-        if(!breweryZip.isEmpty()){
-            count++;
-        }
-        if(!breweryCity.isEmpty()){
-            count++;
-        }
-        if(!type.isEmpty()){
-            count++;
-        }
-        if(!beerNameResult.isEmpty()){
-            count++;
-        }
-        if(!breweryState.isEmpty()){
-            count++;
-        }
-        if(!beerABVResult.isEmpty()){
-            count++;
-        }
-        if(!breweryPhone.isEmpty()){
-            count++;
-        }
-        if(!breweryWebsite.isEmpty()){
-            count++;
-        }
-        if(!breweryEmail.isEmpty()){
-            count++;
-        }
 
-        if(count==0){
-            findDetails = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip, beer_type, beer_name FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID";
-        }else{
-            findDetails = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip, beer_type, beer_name FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where ";
-            if(!breweryNameResult.isEmpty()){
-                findDetails+="brewery_name LIKE '%"+breweryNameResult+"%'";
-                if(count>1){
-                    findDetails+=" and ";
-                    count--;
-                }
-            }
-            if(!breweryZip.isEmpty()){
-                findDetails+="brewery_zip LIKE '"+breweryZip+"%'";
-                if(count>1){
-                    findDetails+=" and ";
-                    count--;
-                }
-            }
-            if(!breweryCity.isEmpty()){
-                breweryCity = breweryCity.trim();
-                //if else city search created by Jeff. May need cleaning up but was the best way to get it to find saint paul in the database
-                if(breweryCity.contentEquals("Saint") || breweryCity.contentEquals("saint")) {
+//SQL statement
+        findDetails = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip,brewery_phone,brewery_website,brewery_email,beer_name,beer_type,ABV FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID";
 
-                    findDetails += "brewery_city LIKE '%St.%'";
 
-                }else if(breweryCity.contains("Saint L")||breweryCity.contains("Saint l")||breweryCity.contains("saint L")||breweryCity.contains("saint l")) {
-
-                    findDetails += "brewery_city LIKE '%St. Louis Park%'";
-
-                }else if(breweryCity.contains("Saint P")||breweryCity.contains("Saint p")||breweryCity.contains("Saint P")||breweryCity.contains("Saint p")){
-
-                    findDetails += "brewery_city LIKE '%St. Paul%'";
-
-                }else{
-
-                    findDetails+="brewery_city LIKE '%"+breweryCity+"%'";
-                }
-                if(count>1){
-                    findDetails+=" and ";
-                    count--;
-                }
-            }
-            if(!type.isEmpty()){
-                findDetails+="beer_type LIKE '%"+type+"%'";
-                if(count>1){
-                    findDetails+=" and ";
-                    count--;
-                }
-            }
-            if(!beerName.isEmpty()){
-                findDetails+="beer_name LIKE '%"+beerName+"%'";
-                if(count>1){
-                    findDetails+=" and ";
-                    count--;
-                }
-            }
 
         SQLiteDatabase db = myDbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery(findDetails,null);
@@ -188,12 +96,12 @@ public class DetailsFragment extends Fragment {
             breweryCity += " "+cursor.getString(2)+",";
             breweryState += " "+cursor.getString(3);
             breweryZip += " "+cursor.getString(4);
-            type = "Type: "+cursor.getString(5);
-            beerNameResult = "Beer Name: "+cursor.getString(6);
-            beerABVResult = "ABV: "+cursor.getString(7);
-            breweryPhone = "Phone: "+cursor.getString(0);
-            breweryEmail = "Email: "+cursor.getString(0);
-            breweryWebsite = "Website: "+cursor.getString(0);
+            beerNameResult = "Beer Name: "+cursor.getString(8);
+            type = "Type: "+cursor.getString(9);
+            beerABVResult = "ABV: "+cursor.getString(10);
+            breweryPhone = "Phone: "+cursor.getString(5);
+            breweryEmail = "Email: "+cursor.getString(7);
+            breweryWebsite = "Website: "+cursor.getString(6);
             detailProductList.add(new Details(1,breweryNameResult, breweryAddress,type,beerNameResult, beerABVResult, breweryPhone, breweryEmail,breweryWebsite));
 
             while(cursor.moveToNext()==true){
@@ -202,12 +110,12 @@ public class DetailsFragment extends Fragment {
                 breweryCity += " "+cursor.getString(2)+",";
                 breweryState += " "+cursor.getString(3);
                 breweryZip += " "+cursor.getString(4);
-                type = "Type: "+cursor.getString(5);
-                beerNameResult = "Beer Name: "+cursor.getString(6);
-                beerABVResult = "ABV: "+cursor.getString(7);
-                breweryPhone = "Phone: "+cursor.getString(0);
-                breweryEmail = "Email: "+cursor.getString(0);
-                breweryWebsite = "Website: "+cursor.getString(0);
+                beerNameResult = "Beer Name: "+cursor.getString(8);
+                type = "Type: "+cursor.getString(9);
+                beerABVResult = "ABV: "+cursor.getString(10);
+                breweryPhone = "Phone: "+cursor.getString(5);
+                breweryEmail = "Email: "+cursor.getString(7);
+                breweryWebsite = "Website: "+cursor.getString(6);
                 detailProductList.add(new Details(1,breweryNameResult, breweryAddress,type,beerNameResult, beerABVResult, breweryPhone, breweryEmail,breweryWebsite));
 
             }
@@ -216,4 +124,4 @@ public class DetailsFragment extends Fragment {
 
         cursor.close();
     }
-}}
+}
