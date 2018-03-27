@@ -143,12 +143,9 @@ public class SearchResultsFragment extends Fragment {
                 }
             }
             if(!beerName.isEmpty()){
-                if(beerName.matches("Cat Fish'n")){
+                beerName = beerName.replace("'","''");
 
-                    find += "beer_name LIKE 'Cat Fish''n'";
-                }else {
-                    find += "beer_name LIKE '%'" + beerName + "%'";
-                }
+                    find += "beer_name LIKE '%" + beerName + "%'";
                 if(count>1){
                     find+=" and ";
                     count--;
