@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.SQLException;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     CustomSwipe customSwipe;
     DatabaseHelper myDbHelper;
+    BottomNavigationView menuView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,22 +59,37 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //////////////////////////////////////////////////////
-        /*
-        Button loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+
+        menuView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        // uncomment we don't want animation menu shifting
+        //BottomNavigationViewHelper.removeShiftMode(menuView);
+        menuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onNavigationItemSelected( MenuItem item) {
 
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                switch (item.getItemId()){
+                    case R.id.scan:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ScannerFragment()).addToBackStack(null).commit();
+                        return true;
 
-                startActivity(intent);
+                    case R.id.search:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  SearchFragment()).addToBackStack(null).commit();
+                        return true;
+
+                    case R.id.map:
+                        Intent mapClick = new Intent(MainActivity.this, MapsActivity.class);
+                        startActivity(mapClick);
+                        return true;
+
+                    case R.id.profile:
+                        Intent profileClick = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(profileClick);
+                        return true;
+                }
+                return false;
             }
         });
-*/
 
-
-///////////////////////////////////////////////////////////////////////
         viewPager = (ViewPager)findViewById(R.id.viewPager);
         customSwipe = new CustomSwipe(this);
         viewPager.setAdapter(customSwipe);
@@ -90,30 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void scanClick(MenuItem item) {
-       // Intent scanClick = new Intent(MainActivity.this, ScanActivity.class);
-       // startActivity(scanClick);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ScannerFragment()).addToBackStack(null).commit();
-    }
-
-
-
-    public void searchClick(MenuItem item) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  SearchFragment()).addToBackStack(null).commit();
-
-    }
-    public void mapClick(MenuItem item) {
-        Intent mapClick = new Intent(MainActivity.this, MapsActivity.class);
-        startActivity(mapClick);
-    }
-
-    public void profileClick(MenuItem item) {
-//        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
-        Intent profileClick = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(profileClick);
-    }
-
     public void infoClick(View view) {
 
         Toast toast = Toast.makeText(MainActivity.this, "Cheeeeers!", Toast.LENGTH_SHORT);
@@ -122,18 +115,6 @@ public class MainActivity extends AppCompatActivity {
         v.setTextSize(40);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
-
-        //Toast.makeText(MainActivity.this, "Cheeeeers!", Toast.LENGTH_LONG).show();
-
-
     }
-    /////////////////////////////////////////////
-/*
-    public void onClick(View view) {
-        //Toast.makeText(MainActivity.this, "Access Denied = "+view, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
 
-    }
-*/
 }
