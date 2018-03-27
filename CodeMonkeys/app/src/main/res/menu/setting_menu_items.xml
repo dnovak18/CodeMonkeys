@@ -3,10 +3,7 @@
 
     <item
         android:id="@+id/login"
-        android:title="Login"/>
-    <item
-        android:id="@+id/logout"
-        android:title="Logout"/>
+        android:title="MyProfile" />
     <item
         android:id="@+id/about"
         android:title="About Dev"/>
