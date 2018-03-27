@@ -7,13 +7,16 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:id="@+id/tool_bar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#ffffa302"
-        app:popupTheme="@style/NoOverlapPopup"
-        app:menu="@menu/setting_menu_items"
         android:layout_alignParentTop="true"
-        android:id="@+id/tool_bar">
+        android:background="#ffffa302"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profileGroup"
+        app:menu="@menu/setting_menu_items"
+        app:popupTheme="@style/NoOverlapPopup">
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -22,17 +25,17 @@
             android:layout_gravity="left"
             android:background="@null"
             android:clickable="true"
-            android:onClick="infoClick"
             android:drawable="@drawable/ic_local_drink_white_24dp"
+            android:onClick="infoClick"
             app:srcCompat="@drawable/ic_local_drink_white_48dp" />
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/imageButton"
             android:gravity="center"
-            android:layout_marginLeft="20dp"
             android:text="The Great Minnesota Drink Together"
             android:textColor="@android:color/white"
             android:textSize="20dp"
@@ -96,9 +99,26 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <android.support.constraint.Group
-        android:layout_width="match_parent"
+        android:id="@+id/profileGroup"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="logoutButton,userEmail,imageView3,profileName"
-        android:id="@+id/profileGroup"/>
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffa302"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_items">
+
+    </android.support.design.widget.BottomNavigationView>
 
 </android.support.constraint.ConstraintLayout>

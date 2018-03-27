@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Group;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -51,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ConstraintLayout profile_Section;
     private Button signOutButton;
     private Group profileGroup;
+    private BottomNavigationView menuView;
 
     // TODO: Rename and change types of parameters
     private static int RC_SIGN_IN = 9001;
@@ -80,6 +84,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signOutButton.setOnClickListener(this);
         profileGroup.setVisibility(View.GONE);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        menuView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        // uncomment we don't want animation menu shifting
+        //BottomNavigationViewHelper.removeShiftMode(menuView);
+        menuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.scan:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ScannerFragment()).addToBackStack(null).commit();
+                        return true;
+
+                    case R.id.search:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new SearchFragment()).addToBackStack(null).commit();
+                        return true;
+
+                    case R.id.map:
+                        Intent mapClick = new Intent(LoginActivity.this, MapsActivity.class);
+                        startActivity(mapClick);
+                        return true;
+
+                    case R.id.profile:
+                        Intent profileClick = new Intent(LoginActivity.this, LoginActivity.class);
+                        startActivity(profileClick);
+                        return true;
+                }
+                return false;
+
+            }
+        });
     }
 
     @Override
