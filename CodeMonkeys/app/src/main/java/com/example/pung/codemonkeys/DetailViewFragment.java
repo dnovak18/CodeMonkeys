@@ -94,8 +94,7 @@ public class DetailViewFragment extends Fragment {
         String beerName = null;
         String beerType = null;
         String ABV = null;
-
-
+breweryName = breweryName.replace("'","''");
         String find = "SELECT beer_name, beer_type, ABV FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where brewery_name= '" +breweryName+"'";
 
 

@@ -123,8 +123,6 @@ public class MapsActivity extends AppCompatActivity implements
                 Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.logout:
-                break;
             case R.id.about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
                 break;
