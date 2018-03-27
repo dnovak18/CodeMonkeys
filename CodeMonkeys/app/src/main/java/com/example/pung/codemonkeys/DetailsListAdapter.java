@@ -46,9 +46,10 @@ public class DetailsListAdapter extends BaseAdapter{
         TextView abv = (TextView)v.findViewById(R.id.beerABV_textView);
 
         //Set text for TextView
-        beerName.setText(detailProductList.get(position).getName());
-        type.setText(String.valueOf(detailProductList.get(position).getAddress()));
-        abv.setText(String.valueOf(detailProductList.get(position).getBeerType()));
+       // beerName.setText(detailProductList.get(position).getName());
+        beerName.setText(String.valueOf(detailProductList.get(position).getBeerName()));
+        type.setText(String.valueOf(detailProductList.get(position).getBeerType()));
+        abv.setText(String.valueOf(detailProductList.get(position).getBeerABV()));
 
         //Save product id to tag
         v.setTag(detailProductList.get(position));

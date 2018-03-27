@@ -1,5 +1,7 @@
 package com.example.pung.codemonkeys;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,7 +9,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by prath on 3/24/2018.
@@ -19,6 +26,14 @@ public class DetailViewFragment extends Fragment {
     String breweryPhone;
     String breweryEmail;
     String breweryWebsite;
+    List<Search> deatilBeerList;
+    ListView beerDetailList;
+    SearchDetailAdapter adapterBeer;
+    DatabaseHelper myDbHelper;
+    String breweryZip;
+    String breweryCity;
+    String beerType;
+    String beerName;
 
     public DetailViewFragment() {
         // Required empty public constructor
@@ -36,6 +51,9 @@ public class DetailViewFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_detail_view, container, false);
 
+        myDbHelper = new DatabaseHelper(getContext());
+        myDbHelper.openDataBase();
+
         Bundle bundle = getArguments();
 
         breweryName = bundle.getString("breweryName");
@@ -43,6 +61,14 @@ public class DetailViewFragment extends Fragment {
         breweryPhone = bundle.getString("breweryPhone");
         breweryEmail = bundle.getString("breweryEmail");
         breweryWebsite = bundle.getString("breweryWebsite");
+
+        deatilBeerList = new ArrayList<>();
+        getBreweryResult();
+        FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
+        beerDetailList = (ListView)view.findViewById(R.id.beer_name_detail);
+        adapterBeer = new SearchDetailAdapter(getActivity().getApplicationContext(), deatilBeerList,fragmentManager);
+       // Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+        beerDetailList.setAdapter(adapterBeer);
 
         TextView breweryNameChange = (TextView)view.findViewById(R.id.brewery_name_detail_textView);
         breweryNameChange.setText(breweryName);
@@ -63,4 +89,36 @@ public class DetailViewFragment extends Fragment {
         return view;
 
     }
+
+    public void getBreweryResult(){
+        String beerName = null;
+        String beerType = null;
+        String ABV = null;
+
+
+        String find = "SELECT beer_name, beer_type, ABV FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where brewery_name= '" +breweryName+"'";
+
+
+        SQLiteDatabase db = myDbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(find,null);
+        if(cursor.moveToFirst()){
+
+            beerName = "Beer Name: "+cursor.getString(0);
+            beerType = "Beer Type: "+ cursor.getString(1);
+            ABV = "Beer Type: "+cursor.getString(2);
+            deatilBeerList.add(new Search(1,beerName, beerType, ABV));
+
+            while(cursor.moveToNext()==true){
+                beerName = "Beer Name: "+ cursor.getString(0);
+                beerType = "Beer Type: "+ cursor.getString(1);
+                ABV = "Beer ABV: "+cursor.getString(2);
+                //Toast.makeText(getActivity(), ABV, Toast.LENGTH_LONG).show();
+                deatilBeerList.add(new Search(1,beerName, beerType, ABV));
+            }
+
+        }
+
+        cursor.close();
+    }
+
 }

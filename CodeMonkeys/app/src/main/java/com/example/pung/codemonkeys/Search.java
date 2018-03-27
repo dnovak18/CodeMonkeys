@@ -13,6 +13,7 @@ public class Search {
     private String phone;
     private String email;
     private String website;
+    private String ABV;
 
 
     public Search(int id, String name, String address, String beerType, String beerName, String phone, String email, String website) {
@@ -24,6 +25,14 @@ public class Search {
         this.phone = phone;
         this.email = email;
         this.website = website;
+
+    }
+
+    public Search(int id, String beerName, String beerType, String ABV) {
+        this.id = id;
+        this.beerName = beerName;
+        this.beerType = beerType;
+        this.ABV = ABV;
 
     }
 
@@ -54,6 +63,9 @@ public class Search {
     }
     public String getWebsite() {
         return website;
+    }
+    public String getABV() {
+        return ABV;
     }
 
 }

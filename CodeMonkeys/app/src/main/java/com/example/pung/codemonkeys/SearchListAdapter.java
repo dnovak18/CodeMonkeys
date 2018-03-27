@@ -47,6 +47,7 @@ public class SearchListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(mContext, R.layout.search_result_layout, null);
+        View v2 = View.inflate(mContext, R.layout.details_beer_layout, null);
         TextView breweryName = (TextView)v.findViewById(R.id.brewery_name_result_textView);
         TextView breweryAddress = (TextView)v.findViewById(R.id.brewery_address_result_textView);
         TextView breweryPhone = (TextView)v.findViewById(R.id.brewery_phone);
@@ -54,6 +55,8 @@ public class SearchListAdapter extends BaseAdapter {
         TextView breweryWebsite = (TextView)v.findViewById(R.id.brewery_website);
         TextView beerType = (TextView)v.findViewById(R.id.beer_type);
         TextView beerName = (TextView)v.findViewById(R.id.beer_name);
+
+
         //Set text for TextView
         breweryName.setText(mProductList.get(position).getName());
         breweryAddress.setText(String.valueOf(mProductList.get(position).getAddress()));

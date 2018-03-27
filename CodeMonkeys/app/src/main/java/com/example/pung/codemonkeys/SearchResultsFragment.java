@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,13 @@ import java.util.List;
 
 public class SearchResultsFragment extends Fragment {
     ListView search;
+    ListView beerDetailList;
     View view;
     SearchListAdapter adapter;
+    SearchListAdapter adapterBeer;
+
     List<Search> mProductList;
+    List<Search> deatilBeerList;
     DatabaseHelper myDbHelper;
     String breweryName;
     String breweryZip;
@@ -52,6 +57,7 @@ public class SearchResultsFragment extends Fragment {
         myDbHelper = new DatabaseHelper(getContext());
         myDbHelper.openDataBase();
         mProductList = new ArrayList<>();
+        deatilBeerList = new ArrayList<>();
 
         FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
         getBreweryResult();
@@ -59,12 +65,10 @@ public class SearchResultsFragment extends Fragment {
         adapter = new SearchListAdapter(getActivity().getApplicationContext(), mProductList,fragmentManager);
         search.setAdapter(adapter);
 
+
         return view;
     }
 
- //  public void test_result(View view){
- //      Toast.makeText(getActivity(), "Access Denied", Toast.LENGTH_LONG).show();
-//   }
 
     public void getBreweryResult(){
         String breweryNameResult = null;
@@ -181,7 +185,6 @@ public class SearchResultsFragment extends Fragment {
                 emailResult = cursor.getString(8);
                 websiteResult = cursor.getString(9);
                 mProductList.add(new Search(1,breweryNameResult, breweryAddress, beerInfo, beerNameResult, phoneResult, emailResult, websiteResult));
-
             }
 
         }
