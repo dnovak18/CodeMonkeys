@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -39,7 +40,7 @@ public class ScannerFragment extends Fragment implements ZXingScannerView.Result
     String breweryPhoneText;
     String breweryEmailText;
     String breweryWebsiteText;
-
+    private LinearLayout qrCameraLayout;
 
     public ScannerFragment() {
         // Required empty public constructor
@@ -59,7 +60,18 @@ public class ScannerFragment extends Fragment implements ZXingScannerView.Result
                              Bundle savedInstanceState) {
         scannerView = new ZXingScannerView(getActivity());
         View view = inflater.inflate(R.layout.fragment_scanner, container, false);
-        return scannerView;
+        qrCameraLayout = (LinearLayout) view.findViewById(R.id.fragment_scanner);
+
+        scannerView = new ZXingScannerView(getActivity().getApplicationContext());
+
+        scannerView.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
+
+        qrCameraLayout.addView(scannerView);
+
+        // return scannerView;
+        return view;
     }
 
     @Override
