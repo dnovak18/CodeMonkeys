@@ -109,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void profileClick(MenuItem item) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
+        Intent profileClick = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(profileClick);
     }
 
     public void infoClick(View view) {

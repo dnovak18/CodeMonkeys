@@ -1,12 +1,16 @@
 package com.example.pung.codemonkeys;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.constraint.Group;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,14 +37,7 @@ import com.google.android.gms.common.api.Status;
 import org.w3c.dom.Text;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link LoginFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView profilePic;
     private ConstraintLayout profile_Section;
     private Button signOutButton;
-    private LinearLayout buttonSection;
+    private Group profileGroup;
 
     // TODO: Rename and change types of parameters
     private static int RC_SIGN_IN = 9001;
@@ -68,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
         profile_Section = (ConstraintLayout)findViewById(R.id.profileSection);
-//        buttonSection = (LinearLayout)findViewById(R.id.linearLayout2);
+        profileGroup = (Group)findViewById(R.id.profileGroup);
         Name = (TextView)findViewById(R.id.profileName);
         profilePic = (ImageView)findViewById(R.id.imageView3);
         Email = (TextView)findViewById(R.id.userEmail);
@@ -81,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signInButton.setOnClickListener(this);
         signOutButton = (Button)findViewById(R.id.logoutButton);
         signOutButton.setOnClickListener(this);
-//        profile_Section.setVisibility(View.GONE);
+        profileGroup.setVisibility(View.GONE);
 
     }
 
@@ -89,7 +86,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onStart() {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        // updateUI(account);
+        if(account != null){
+            updateUI(true);
+            String name = account.getDisplayName();
+            String email = account.getEmail();
+            Uri imgURI = account.getPhotoUrl();
+            if(imgURI != null){
+                String imgURL = account.getPhotoUrl().toString();
+                Glide.with(this).load(imgURL).into(profilePic);
+            }
+            Name.setText(name);
+            Email.setText(email);
+
+        } else updateUI(false);
     }
 
 
@@ -135,10 +144,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             GoogleSignInAccount account = result.getSignInAccount();
             String name = account.getDisplayName();
             String email = account.getEmail();
-            String imgURL = account.getPhotoUrl().toString();
+            Uri imgURI = account.getPhotoUrl();
+            if(imgURI != null){
+                String imgURL = account.getPhotoUrl().toString();
+                Glide.with(this).load(imgURL).into(profilePic);
+            }
             Name.setText(name);
             Email.setText(email);
-            Glide.with(this).load(imgURL).into(profilePic);
             updateUI(true);
 
 
@@ -152,16 +164,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     private void updateUI(boolean isLogin){
         if(isLogin){
-//            signInButton.setVisibility(View.GONE);
-//            profile_Section.setVisibility(View.VISIBLE);
+            signInButton.setVisibility(View.GONE);
+            profileGroup.setVisibility(View.VISIBLE);
         }else{
-//            signInButton.setVisibility(View.VISIBLE);
-//            profile_Section.setVisibility(View.GONE);
+            signInButton.setVisibility(View.VISIBLE);
+            profileGroup.setVisibility(View.GONE);
+            Glide.with(this).clear(profilePic);
         }
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+    public void infoClick(View view) {
+
+        Toast toast = Toast.makeText(LoginActivity.this, "Cheeeeers!", Toast.LENGTH_SHORT);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        v.setTextColor(Color.RED);
+        v.setTextSize(40);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+
+        //Toast.makeText(MainActivity.this, "Cheeeeers!", Toast.LENGTH_LONG).show();
+
 
     }
 }
