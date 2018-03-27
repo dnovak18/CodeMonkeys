@@ -102,6 +102,7 @@ public class SearchResultsFragment extends Fragment {
         }else{
             find = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip, beer_type, beer_name, brewery_phone, brewery_email, brewery_website FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where ";
             if(!breweryName.isEmpty()){
+                 breweryName = breweryName.replace("'", "''");
                 find+="brewery_name LIKE '%"+breweryName+"%'";
                 if(count>1){
                     find+=" and ";
