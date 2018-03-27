@@ -13,7 +13,6 @@
     android:orientation="vertical">
     tools:context="com.example.pung.codemonkeys.SearchResultsFragment">
 
-
     <TextView
         android:id="@+id/searchResultTextView"
         android:layout_width="match_parent"

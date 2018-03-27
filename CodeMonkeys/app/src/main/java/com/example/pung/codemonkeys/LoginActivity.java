@@ -85,9 +85,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         profileGroup.setVisibility(View.GONE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         menuView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         // uncomment we don't want animation menu shifting
@@ -98,11 +98,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 switch (item.getItemId()) {
                     case R.id.scan:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ScannerFragment()).addToBackStack(null).commit();
+
+                        //Intent scanClick = new Intent(LoginActivity.this, MainActivity.class);
+                        //startActivity(scanClick);
+                       // return true;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.profileSection, new ScannerFragment()).addToBackStack(null).commit();
                         return true;
 
                     case R.id.search:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new SearchFragment()).addToBackStack(null).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.profileSection, new SearchFragment()).addToBackStack(null).commit();
                         return true;
 
                     case R.id.map:
