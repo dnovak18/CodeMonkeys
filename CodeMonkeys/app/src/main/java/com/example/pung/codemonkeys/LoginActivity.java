@@ -159,6 +159,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -177,6 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
+
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
 
@@ -198,6 +200,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         }else {
+            //Toast.makeText(this, "fail", Toast.LENGTH_LONG).show();
             //Coded to determine status code errors on connection
 //            int statusCode = result.getStatus().getStatusCode();
 //            Toast.makeText(this, "Generic ERROR CODE" + statusCode, Toast.LENGTH_LONG).show();
