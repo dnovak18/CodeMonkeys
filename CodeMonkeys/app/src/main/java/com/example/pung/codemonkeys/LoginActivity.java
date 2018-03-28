@@ -102,21 +102,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         //Intent scanClick = new Intent(LoginActivity.this, MainActivity.class);
                         //startActivity(scanClick);
                        // return true;
-                        getSupportFragmentManager().beginTransaction().replace(R.id.profileSection, new ScannerFragment()).addToBackStack(null).commit();
+                       // getSupportFragmentManager().beginTransaction().replace(R.id.profileSection, new ScannerFragment()).addToBackStack(null).commit();
                         return true;
 
                     case R.id.search:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.profileSection, new SearchFragment()).addToBackStack(null).commit();
+                      //  getSupportFragmentManager().beginTransaction().replace(R.id.profileSection, new SearchFragment()).addToBackStack(null).commit();
                         return true;
 
                     case R.id.map:
-                        Intent mapClick = new Intent(LoginActivity.this, MapsActivity.class);
-                        startActivity(mapClick);
+                      //  Intent mapClick = new Intent(LoginActivity.this, MapsActivity.class);
+                       // startActivity(mapClick);
                         return true;
 
                     case R.id.profile:
-                        Intent profileClick = new Intent(LoginActivity.this, LoginActivity.class);
-                        startActivity(profileClick);
+                       // Intent profileClick = new Intent(LoginActivity.this, LoginActivity.class);
+                      //  startActivity(profileClick);
                         return true;
                 }
                 return false;
