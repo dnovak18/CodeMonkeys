@@ -37,4 +37,31 @@
         android:layout_toRightOf = "@+id/beer_type"
         android:text="Name"
         android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/brewery_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf = "@+id/beer_type"
+        android:text="Name"
+        android:visibility="gone"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/brewery_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf = "@+id/beer_type"
+        android:text="Name"
+        android:visibility="gone"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/brewery_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf = "@+id/beer_type"
+        android:text="Name"
+        android:visibility="gone"
+        android:textColor="#000000"/>
 </LinearLayout>

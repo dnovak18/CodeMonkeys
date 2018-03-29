@@ -8,24 +8,24 @@
         android:icon="@drawable/if_barcode_363078"
         android:title="@string/menu_scan"
         android:visible="true"
-        android:onClick="scanClick"
+        android:id="@+id/scan"
         />
     <item
         android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/menu_search"
         android:visible="true"
-        android:onClick="searchClick"
+        android:id="@+id/search"
         />
     <item
         android:icon="@drawable/ic_location_on_black_24dp"
         android:title="@string/menu_map"
         android:visible="true"
-        android:onClick="mapClick"
+        android:id="@+id/map"
         />
     <item
         android:icon="@drawable/ic_person_black_24dp"
         android:title="@string/menu_profile"
         android:visible="true"
-        android:onClick="profileClick"
+        android:id="@+id/profile"
         />
 </menu>

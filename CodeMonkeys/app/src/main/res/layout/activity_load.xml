@@ -11,12 +11,12 @@
         android:id="@+id/loading_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxHeight="60dp"
-        android:maxWidth="60dp"
         android:layout_alignParentBottom="true"
-        android:adjustViewBounds="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="60dp"
+        android:maxWidth="60dp"
         app:srcCompat="@drawable/loading" />
 
     <ImageView

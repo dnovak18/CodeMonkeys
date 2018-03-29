@@ -2,9 +2,9 @@ package com.example.pung.codemonkeys;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.ImageView;
 
 public class LoadActivity extends AppCompatActivity {
@@ -14,13 +14,14 @@ public class LoadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load);
+        ImageView loading = (ImageView)findViewById(R.id.loading_image);
+        animation = (AnimationDrawable)loading.getDrawable();
+        animation.start();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent homeIntent = new Intent(LoadActivity.this, MainActivity.class);
                 startActivity(homeIntent);
-                ImageView loading = (ImageView)findViewById(R.id.loading_image);
-                animation = (AnimationDrawable)loading.getDrawable();
                 finish();
             }
         },SPLASH_TIME_OUT);

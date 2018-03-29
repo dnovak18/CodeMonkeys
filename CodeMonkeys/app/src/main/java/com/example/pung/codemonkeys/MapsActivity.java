@@ -1,13 +1,20 @@
 package com.example.pung.codemonkeys;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.*;
-
+import android.support.v7.widget.Toolbar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -67,12 +74,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-//mport com.google.android.gms.common.internal.safeparcel.SafePareclable;
+//import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
 //public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
   //  public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 //  }
-public class MapsActivity extends FragmentActivity implements
+public class MapsActivity extends AppCompatActivity implements
         GoogleMap.OnMyLocationClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,  GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -102,11 +109,36 @@ public class MapsActivity extends FragmentActivity implements
      */
     private boolean mPermissionDenied = false;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.setting_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.login:
+                Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.about:
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
+                break;
+            default:
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             checkLocationPermission();
@@ -121,19 +153,48 @@ public class MapsActivity extends FragmentActivity implements
             Log.d("onCreate","Google Play Services available.");
         }
 
-        // Construct a GeoDataClient.
-        //mGeoDataClient = Places.getGeoDataClient(this, null);
-
-        // Construct a PlaceDetectionClient.
-        //mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
-
-        // Construct a FusedLocationProviderClient.
-        //mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+    }
+
+    public void scanClick(MenuItem item) {
+        // Intent scanClick = new Intent(MainActivity.this, ScanActivity.class);
+        // startActivity(scanClick);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ScannerFragment()).addToBackStack(null).commit();
+    }
+
+
+
+    public void searchClick(MenuItem item) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  SearchFragment()).addToBackStack(null).commit();
+
+    }
+    public void mapClick(MenuItem item) {
+        Intent mapClick = new Intent(MapsActivity.this, MapsActivity.class);
+        startActivity(mapClick);
+    }
+
+    public void profileClick(MenuItem item) {
+//        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
+        Intent profileClick = new Intent(MapsActivity.this, LoginActivity.class);
+        startActivity(profileClick);
+    }
+    public void infoClick(View view) {
+
+        Toast toast = Toast.makeText(MapsActivity.this, "Cheeeeers!", Toast.LENGTH_SHORT);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        v.setTextColor(Color.RED);
+        v.setTextSize(40);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+
+        //Toast.makeText(MainActivity.this, "Cheeeeers!", Toast.LENGTH_LONG).show();
 
 
     }
@@ -157,8 +218,7 @@ public class MapsActivity extends FragmentActivity implements
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
+     * This is where we can add markers or lines, add listeners or move the camera.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -167,7 +227,7 @@ public class MapsActivity extends FragmentActivity implements
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         // Set the camera to the greatest possible zoom level that includes the
         // bounds
       //  LatLngBounds MINNESOTA = new LatLngBounds(new LatLng(42.5, -97.9), new LatLng(51.1, -89.5));
@@ -190,13 +250,17 @@ public class MapsActivity extends FragmentActivity implements
             mMap.setMyLocationEnabled(true);
         }
 
+
+
         Button btnBreweries = (Button) findViewById(R.id.btnBreweries);
+
         btnBreweries.setOnClickListener(new View.OnClickListener() {
             String Brewery = "brewery";
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
                 mMap.clear();
+
                 String url = getUrl(latitude, longitude, Brewery);
                 Object[] DataTransfer = new Object[2];
                 DataTransfer[0] = mMap;
@@ -204,16 +268,17 @@ public class MapsActivity extends FragmentActivity implements
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
+
                 Toast.makeText(MapsActivity.this,"Nearby Breweries", Toast.LENGTH_LONG).show();
             }
+
+
         });
+
 
         //mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         enableMyLocation();
-
-
-
 
         // Add a marker in MSP and move the camera
         // mMap.addMarker(new MarkerOptions().position(msp).title("Marker in MSP"));
@@ -221,6 +286,28 @@ public class MapsActivity extends FragmentActivity implements
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(msp));
 
     }
+    private void showBreweries(){
+        Button btnBreweries = (Button) findViewById(R.id.btnBreweries);
+        btnBreweries.performClick();
+    }
+
+    private void reCenter(){
+        final SupportMapFragment smf = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        smf.getView().findViewById(0x2).performClick();
+    }
+    /*
+    private void showBreweries(View v){
+        mMap.clear();
+        String url = getUrl(latitude, longitude, "brewery");
+        Object[] DataTransfer = new Object[2];
+        DataTransfer[0] = mMap;
+        DataTransfer[1] = url;
+        Log.d("onClick", url);
+        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+        getNearbyPlacesData.execute(DataTransfer);
+    }
+*/
     /**
      * Enables the My Location layer if the fine location permission has been granted.
      */
@@ -311,7 +398,13 @@ public class MapsActivity extends FragmentActivity implements
             Log.d("onLocationChanged", "Removing Location Updates");
         }
         Log.d("onLocationChanged", "Exit");
+        showBreweries();
+        reCenter();
+        //latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        //mMap.getCameraPosition();
 
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
     }
 
     @Override
@@ -395,4 +488,5 @@ public class MapsActivity extends FragmentActivity implements
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
+
 }

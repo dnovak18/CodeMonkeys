@@ -19,7 +19,7 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/breweryNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:hint="Brewery Name"
         android:text="" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/breweryZipEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:hint="Brewery Zip"
         android:text="" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/breweryCityEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         android:hint="Brewery City"
         android:text="" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/beerTypeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
         android:hint="Beer Type"
         android:text="" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/beerNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,6 +73,7 @@
         android:paddingBottom="20dp"
         android:hint="Beer Name"
         android:text="" />
+
 
     <Button
         android:id="@+id/searchButton"
