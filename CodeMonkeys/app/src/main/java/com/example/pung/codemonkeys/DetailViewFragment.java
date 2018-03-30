@@ -13,6 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +27,7 @@ import java.util.List;
  * Created by prath on 3/24/2018.
  */
 
-public class DetailViewFragment extends Fragment {
+public class DetailViewFragment extends Fragment implements OnMapReadyCallback{
     String breweryName;
     String breweryAddress;
     String breweryPhone;
@@ -34,7 +41,8 @@ public class DetailViewFragment extends Fragment {
     String breweryCity;
     String beerType;
     String beerName;
-
+    MapView mapView;
+    GoogleMap map;
     public DetailViewFragment() {
         // Required empty public constructor
     }
@@ -53,6 +61,14 @@ public class DetailViewFragment extends Fragment {
 
         myDbHelper = new DatabaseHelper(getContext());
         myDbHelper.openDataBase();
+
+        mapView = (MapView) view.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
+        //map = mapView.getMap();
+
+       // map.getUiSettings().setMyLocationButtonEnabled(false);
+        //map.setMyLocationEnabled(true);
 
         Bundle bundle = getArguments();
 
@@ -94,7 +110,7 @@ public class DetailViewFragment extends Fragment {
         String beerName = null;
         String beerType = null;
         String ABV = null;
-breweryName = breweryName.replace("'","''");
+        breweryName = breweryName.replace("'","''");
         String find = "SELECT beer_name, beer_type, ABV FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where brewery_name= '" +breweryName+"'";
 
 
@@ -120,4 +136,30 @@ breweryName = breweryName.replace("'","''");
         cursor.close();
     }
 
+    @Override
+    public void onResume() {
+        mapView.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        map.getUiSettings().setZoomControlsEnabled(true);
+        LatLng sydney = new LatLng(-33.852, 151.211);
+        //map.addMarker(new MarkerOptions().position(/*some location*/));
+        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(/*some location*/, 10));
+        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
 }
