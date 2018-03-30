@@ -73,8 +73,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Name = (TextView)findViewById(R.id.profileName);
         profilePic = (ImageView)findViewById(R.id.imageView3);
         Email = (TextView)findViewById(R.id.userEmail);
+        String serverClientId = getString(R.string.server_client_id);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail().build();
+                .requestServerAuthCode(serverClientId)
+                .requestEmail()
+                .build();
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
