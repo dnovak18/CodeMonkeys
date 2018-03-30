@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     CustomSwipe customSwipe;
     DatabaseHelper myDbHelper;
     BottomNavigationView menuView;
+    boolean active = true;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
             default:
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+        active = false;
+        super.onStop();
+
+    }
+
+    public boolean isStop(){
+        return active;
     }
 
     @Override
@@ -80,8 +92,11 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.profile:
-                        Intent profileClick = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(profileClick);
+                       // LoginFragment loginFragment = new LoginFragment();
+                       // loginFragment.onPause();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  LoginFragment()).addToBackStack(null).commit();
+                        //Intent profileClick = new Intent(MainActivity.this, LoginActivity.class);
+                        //startActivity(profileClick);
                         return true;
                 }
                 return false;

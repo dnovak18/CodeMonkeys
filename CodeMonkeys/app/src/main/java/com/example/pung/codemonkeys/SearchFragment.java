@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class SearchFragment extends Fragment {
@@ -124,6 +125,9 @@ public class SearchFragment extends Fragment {
 
               SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
               searchResultsFragment.setArguments(bundle);
+
+
+
 
               fragmentTransaction.replace(R.id.activity_main, searchResultsFragment);
               fragmentTransaction.commit();
