@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by navneet on 23/7/16.
+ * Created by Nick on 2/8/18.
  */
 public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
 
@@ -65,6 +65,8 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
             //move map camera
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
+
         }
     }
 }
