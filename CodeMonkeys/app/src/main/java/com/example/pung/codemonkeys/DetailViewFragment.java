@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -125,10 +124,6 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
     ListView beerDetailList;
     SearchDetailAdapter adapterBeer;
     DatabaseHelper myDbHelper;
-    String breweryZip;
-    String breweryCity;
-    String beerType;
-    String beerName;
     MapView mapView;
     GoogleMap mMap;
     private int MY_LOCATION_REQUEST_CODE;
