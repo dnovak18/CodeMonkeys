@@ -33,7 +33,7 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback{
     String breweryPhone;
     String breweryEmail;
     String breweryWebsite;
-    List<Search> deatilBeerList;
+    List<Search> detailBeerList;
     ListView beerDetailList;
     SearchDetailAdapter adapterBeer;
     DatabaseHelper myDbHelper;
@@ -62,9 +62,7 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback{
         myDbHelper = new DatabaseHelper(getContext());
         myDbHelper.openDataBase();
 
-        mapView = (MapView) view.findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
+
         //map = mapView.getMap();
 
        // map.getUiSettings().setMyLocationButtonEnabled(false);
@@ -78,28 +76,35 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback{
         breweryEmail = bundle.getString("breweryEmail");
         breweryWebsite = bundle.getString("breweryWebsite");
 
-        deatilBeerList = new ArrayList<>();
+        detailBeerList = new ArrayList<>();
         getBreweryResult();
         FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
         beerDetailList = (ListView)view.findViewById(R.id.beer_name_detail);
-        adapterBeer = new SearchDetailAdapter(getActivity().getApplicationContext(), deatilBeerList,fragmentManager);
+        adapterBeer = new SearchDetailAdapter(getActivity().getApplicationContext(), detailBeerList,fragmentManager);
        // Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
         beerDetailList.setAdapter(adapterBeer);
 
-        TextView breweryNameChange = (TextView)view.findViewById(R.id.brewery_name_detail_textView);
+        ViewGroup headerView = (ViewGroup)getLayoutInflater().inflate(R.layout.detail_header, null);
+        beerDetailList.addHeaderView(headerView);
+
+        TextView breweryNameChange = (TextView)headerView.findViewById(R.id.brewery_name_detail_textView);
         breweryNameChange.setText(breweryName);
 
-        TextView breweryAddressChange = (TextView)view.findViewById(R.id.brewery_address_detail_textView);
+        TextView breweryAddressChange = (TextView)headerView.findViewById(R.id.brewery_address_detail_textView);
         breweryAddressChange.setText(breweryAddress);
 
-        TextView breweryPhoneChange = (TextView)view.findViewById(R.id.brewery_phone_detail_textView_change);
+        TextView breweryPhoneChange = (TextView)headerView.findViewById(R.id.brewery_phone_detail_textView_change);
         breweryPhoneChange.setText(breweryPhone);
 
-        TextView breweryEmailChange = (TextView)view.findViewById(R.id.brewery_email_detail_textView_change);
+        TextView breweryEmailChange = (TextView)headerView.findViewById(R.id.brewery_email_detail_textView_change);
         breweryEmailChange.setText(breweryEmail);
 
-        TextView breweryWebsiteChange = (TextView)view.findViewById(R.id.brewery_website_detail_textView_change);
+        TextView breweryWebsiteChange = (TextView)headerView.findViewById(R.id.brewery_website_detail_textView_change);
         breweryWebsiteChange.setText(breweryWebsite);
+
+        mapView = (MapView) headerView.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
 
 
         return view;
@@ -121,14 +126,14 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback{
             beerName = "Beer Name: "+cursor.getString(0);
             beerType = "Beer Type: "+ cursor.getString(1);
             ABV = "Beer Type: "+cursor.getString(2);
-            deatilBeerList.add(new Search(1,beerName, beerType, ABV));
+            detailBeerList.add(new Search(1,beerName, beerType, ABV));
 
             while(cursor.moveToNext()==true){
                 beerName = "Beer Name: "+ cursor.getString(0);
                 beerType = "Beer Type: "+ cursor.getString(1);
                 ABV = "Beer ABV: "+cursor.getString(2);
                 //Toast.makeText(getActivity(), ABV, Toast.LENGTH_LONG).show();
-                deatilBeerList.add(new Search(1,beerName, beerType, ABV));
+                detailBeerList.add(new Search(1,beerName, beerType, ABV));
             }
 
         }
