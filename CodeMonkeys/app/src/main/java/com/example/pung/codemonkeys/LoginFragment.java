@@ -1,5 +1,14 @@
 package com.example.pung.codemonkeys;
 
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
@@ -25,6 +34,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
 
+import com.example.pung.codemonkeys.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -39,9 +49,7 @@ import com.google.android.gms.common.api.Status;
 
 import org.w3c.dom.Text;
 
-
-
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+public class LoginFragment extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,93 +67,63 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // TODO: Rename and change types of parameters
     private static int RC_SIGN_IN = 9001;
 
-    public LoginActivity() {
+    public LoginFragment() {
         // Required empty public constructor
     }
+
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity_layout);
-        profile_Section = (ConstraintLayout)findViewById(R.id.profileSection);
-        profileGroup = (Group)findViewById(R.id.profileGroup);
-        Name = (TextView)findViewById(R.id.profileName);
-        profilePic = (ImageView)findViewById(R.id.imageView3);
-        Email = (TextView)findViewById(R.id.userEmail);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view =inflater.inflate(R.layout.fragment_login, container, false);
+
+        profile_Section = (ConstraintLayout)view.findViewById(R.id.profileSection);
+        profileGroup = (Group)view.findViewById(R.id.profileGroup);
+        Name = (TextView)view.findViewById(R.id.profileName);
+        profilePic = (ImageView)view.findViewById(R.id.imageView3);
+        Email = (TextView)view.findViewById(R.id.userEmail);
+
         String serverClientId = getString(R.string.server_client_id);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestServerAuthCode(serverClientId)
                 .requestEmail()
                 .build();
-        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
+
+
+
+
+        googleApiClient = new GoogleApiClient.Builder(getActivity()).enableAutoManage(getActivity(),0, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+
+
+
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+        signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(this);
-        signOutButton = (Button)findViewById(R.id.logoutButton);
+        signOutButton = (Button)view.findViewById(R.id.logoutButton);
         signOutButton.setOnClickListener(this);
         profileGroup.setVisibility(View.GONE);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        menuView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
-        // uncomment we don't want animation menu shifting
-        //BottomNavigationViewHelper.removeShiftMode(menuView);
-        menuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
 
-                switch (item.getItemId()) {
-                    case R.id.scan:
+        // Build a GoogleSignInClient with the options specified by gso.
 
-                        //Intent scanClick = new Intent(LoginActivity.this, MainActivity.class);
-                        //startActivity(scanClick);
-                       // return true;
-                       // getSupportFragmentManager().beginTransaction().replace(R.id.profileSection, new ScannerFragment()).addToBackStack(null).commit();
-                        return true;
 
-                    case R.id.search:
-                      //  getSupportFragmentManager().beginTransaction().replace(R.id.profileSection, new SearchFragment()).addToBackStack(null).commit();
-                        return true;
 
-                    case R.id.map:
-                      //  Intent mapClick = new Intent(LoginActivity.this, MapsActivity.class);
-                       // startActivity(mapClick);
-                        return true;
 
-                    case R.id.profile:
-                       // Intent profileClick = new Intent(LoginActivity.this, LoginActivity.class);
-                      //  startActivity(profileClick);
-                        return true;
-                }
-                return false;
-
-            }
-        });
+        return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null){
-            updateUI(true);
-            String name = account.getDisplayName();
-            String email = account.getEmail();
-            Uri imgURI = account.getPhotoUrl();
-            if(imgURI != null){
-                String imgURL = account.getPhotoUrl().toString();
-                Glide.with(this).load(imgURL).into(profilePic);
-            }
-            Name.setText(name);
-            Email.setText(email);
-
-        } else updateUI(false);
-    }
 
 
     @Override
@@ -226,17 +204,57 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-    public void infoClick(View view) {
 
-        Toast toast = Toast.makeText(LoginActivity.this, "Cheeeeers!", Toast.LENGTH_SHORT);
-        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-        v.setTextColor(Color.RED);
-        v.setTextSize(40);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+    @Override
+    public void onPause() {
+        Toast.makeText(getActivity(), "login onPause", Toast.LENGTH_LONG).show();
+        super.onPause();
 
-        //Toast.makeText(MainActivity.this, "Cheeeeers!", Toast.LENGTH_LONG).show();
-
-
+        googleApiClient.stopAutoManage(getActivity());
+        googleApiClient.connect();
     }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (googleApiClient != null) {
+            googleApiClient.connect();
+            Toast.makeText(getActivity(), "login onStart", Toast.LENGTH_LONG).show();
+        }
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
+        if(account != null){
+            updateUI(true);
+            String name = account.getDisplayName();
+            String email = account.getEmail();
+            Uri imgURI = account.getPhotoUrl();
+            if(imgURI != null){
+                String imgURL = account.getPhotoUrl().toString();
+                Glide.with(this).load(imgURL).into(profilePic);
+            }
+            Name.setText(name);
+            Email.setText(email);
+
+        } else updateUI(false);
+    }
+
+
+    @Override
+    public void onStop() {
+        Toast.makeText(getActivity(), "login onStop", Toast.LENGTH_LONG).show();
+        if (googleApiClient != null && googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
+            Toast.makeText(getActivity(), "login onStop", Toast.LENGTH_LONG).show();
+        }
+        super.onStop();
+    }
+
+/*
+    public void onDestroy() {
+        super.onDestroy();
+        googleApiClient.stopAutoManage(getActivity());
+        googleApiClient.disconnect();
+    }
+*/
 }
