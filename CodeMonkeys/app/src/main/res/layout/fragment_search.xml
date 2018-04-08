@@ -6,7 +6,7 @@
     android:layout_below="@+id/tool_bar"
     android:layout_above="@+id/bottomNavigationView"
     android:background="@color/colorWhite"
-    tools:context="com.example.pung.codemonkeys.SearchFragment">
+    tools:context="com.MNbeerapp.pung.codemonkeys.SearchFragment">
 
 
     <TextView

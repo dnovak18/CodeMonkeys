@@ -8,7 +8,7 @@
     android:layout_below="@+id/tool_bar"
     android:layout_above="@+id/bottomNavigationView"
     android:background="@color/colorWhite"
-    tools:context="com.example.pung.codemonkeys.LoginFragment">
+    tools:context="com.MNbeerapp.pung.codemonkeys.LoginFragment">
 
 
     <com.google.android.gms.common.SignInButton

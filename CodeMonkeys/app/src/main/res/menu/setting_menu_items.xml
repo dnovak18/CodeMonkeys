@@ -7,4 +7,7 @@
     <item
         android:id="@+id/about"
         android:title="About Dev"/>
+    <item
+        android:id="@+id/privacy"
+        android:title="Privacy Policy"/>
 </menu>

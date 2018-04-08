@@ -17,8 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.io.IOException;
 
 
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.login:
-                Intent intent = new Intent(MainActivity.this, FirebaseLogin.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.about:
@@ -94,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.profile:
-                        //LoginFragment loginFragment = new LoginFragment();
-                        //loginFragment.onPause();
-                        //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  LoginFragment()).addToBackStack(null).commit();
-                       Intent profileClick = new Intent(MainActivity.this, FirebaseLogin.class);
-                         startActivity(profileClick);
+                       // LoginFragment loginFragment = new LoginFragment();
+                       // loginFragment.onPause();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  LoginFragment()).addToBackStack(null).commit();
+                        //Intent profileClick = new Intent(MainActivity.this, LoginActivity.class);
+                        //startActivity(profileClick);
                         return true;
                 }
                 return false;

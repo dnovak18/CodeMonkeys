@@ -47,7 +47,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavigationView"
         android:layout_below="@+id/tool_bar"
-        tools:context="com.example.pung.codemonkeys.MapsActivity" />
+        tools:context="com.MNbeerapp.pung.codemonkeys.MapsActivity" />
 
     <Button
         android:id="@+id/btnBreweries"

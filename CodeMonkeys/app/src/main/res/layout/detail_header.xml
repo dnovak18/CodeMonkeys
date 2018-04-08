@@ -8,7 +8,7 @@
     android:layout_above="@+id/bottomNavigationView"
     android:layout_below="@+id/tool_bar"
     android:background="@color/colorWhite"
-    tools:context="com.example.pung.codemonkeys.DetailViewFragment">
+    tools:context="com.MNbeerapp.pung.codemonkeys.DetailViewFragment">
 
     <TextView
         android:id="@+id/brewery_name_detail_textView"
