@@ -338,32 +338,6 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
            // mMap.setMyLocationEnabled(true);
         }
 
-            // Button btnBreweries = (Button) findViewById(R.id.btnBreweries);
-
-            //btnBreweries.setOnClickListener(new View.OnClickListener() {
-            //String Brewery = "brewery";
-            //@Override
-            // public void onClick(View v) {
-            //     Log.d("onClick", "Button is Clicked");
-            //mMap.clear();
-/*
-            String url = getUrl(latitude, longitude, breweryName);
-
-            // String url = getUrl(breweryAddress);
-            Object[] DataTransfer = new Object[2];
-            DataTransfer[0] = mMap;
-            DataTransfer[1] = url;
-            //Log.d("onClick", url);
-            GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-            getNearbyPlacesData.execute(DataTransfer);
-        Toast.makeText(getActivity(),"After Data Xfer", Toast.LENGTH_LONG).show();
-            //Toast.makeText(MapsActivity.this,"Nearby Breweries", Toast.LENGTH_LONG).show();
-            //     }
-
-
-            // });
-
-*/
             //mMap.setOnMyLocationButtonClickListener(this);
             mMap.setOnMyLocationClickListener(this);
             enableMyLocation();
@@ -371,8 +345,9 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
 
         LatLng address = getLocationFromAddress(getActivity(), breweryAddress);
         mMap.addMarker(new MarkerOptions().position(address).title(breweryName));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(address));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(address));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(address, 11));
             // Add a marker in MSP and move the camera
             // mMap.addMarker(new MarkerOptions().position(msp).title("Marker in MSP"));
 
