@@ -47,6 +47,7 @@ public class SearchFragment extends Fragment {
     public String[] getArrayBreweryName(String search, String table){
 
         String searchDatabase = "SELECT DISTINCT "+search+" FROM  "+table;
+
         myDbHelper = new DatabaseHelper(getContext());
         myDbHelper.openDataBase();
         SQLiteDatabase db = myDbHelper.getWritableDatabase();
@@ -73,9 +74,8 @@ public class SearchFragment extends Fragment {
         breweryZip = (EditText) view.findViewById(R.id.breweryZipEditText);
         breweryCity = (EditText) view.findViewById(R.id.breweryCityEditText);
         beerType = (EditText) view.findViewById(R.id.beerTypeEditText);
-    beerName = (EditText) view.findViewById(R.id.beerNameEditText);
+        beerName = (EditText) view.findViewById(R.id.beerNameEditText);
 
-        //autocomplete
         AutoCompleteTextView autoCompleteTextViewBreweryName = (AutoCompleteTextView)view.findViewById(R.id.breweryNameEditText);
         ArrayAdapter<String> adapterBreweryName = new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,getArrayBreweryName("brewery_name", "brewery_table"));
         autoCompleteTextViewBreweryName.setAdapter(adapterBreweryName);
