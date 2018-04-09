@@ -1,55 +1,43 @@
 {
   "project_info": {
-    "project_number": "77060578919",
-    "firebase_url": "https://greatmndrinktogether.firebaseio.com",
-    "project_id": "greatmndrinktogether",
-    "storage_bucket": "greatmndrinktogether.appspot.com"
+    "project_number": "31550064791",
+    "firebase_url": "https://my-project-1522451169693.firebaseio.com",
+    "project_id": "my-project-1522451169693",
+    "storage_bucket": "my-project-1522451169693.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:77060578919:android:b8c6f11419a957a0",
+        "mobilesdk_app_id": "1:31550064791:android:18efa218eb8fd95b",
         "android_client_info": {
           "package_name": "com.MNbeerapp.pung.codemonkeys"
         }
       },
       "oauth_client": [
         {
-          "client_id": "77060578919-irue7s8gmmsq39o65tuhblvsn1o22seh.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "77060578919-8rurjfh824s2se8lhgigt8sun46b7g86.apps.googleusercontent.com",
+          "client_id": "31550064791-risqnk1kku8eaj4obpc7soqpljbs536a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.pung.codemonkeys",
-            "certificate_hash": "6a9113ccf9dd6d4fb72c4a2355bdceb0635bd45a"
+            "package_name": "com.MNbeerapp.pung.codemonkeys",
+            "certificate_hash": "82ee651b09b1c586a359bdcc50639c15b6cefd9b"
           }
         },
         {
-          "client_id": "77060578919-a1918qk5h5ks2cnebcps28j909vjfudf.apps.googleusercontent.com",
+          "client_id": "31550064791-ef6snd04o948lplfbmi55if0gf2tq5jp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.pung.codemonkeys",
-            "certificate_hash": "58aa091e939650d6158957bafc51ce68a195e51e"
+            "package_name": "com.MNbeerapp.pung.codemonkeys",
+            "certificate_hash": "965519b092f97744837d7b811cee29e4ca05825d"
           }
         },
         {
-          "client_id": "77060578919-14oghom29kstfa982rogqen232f97cvo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.pung.codemonkeys",
-            "certificate_hash": "5dd3cd31d8794acc1f024fc6f54413ea50f06fea"
-          }
-        },
-        {
-          "client_id": "77060578919-hr3ns580qh0ql3f6coopu0cec5q6692f.apps.googleusercontent.com",
+          "client_id": "31550064791-lb744pc021qdkuk71f7opvpq7d16sorm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAjgB0Zfk_-mtGmySOINej_6rXk16Qo9V4"
+          "current_key": "AIzaSyARUs5iWfjpsPUI9rFhwtAmAaldIIdqddU"
         }
       ],
       "services": {
@@ -60,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "77060578919-irue7s8gmmsq39o65tuhblvsn1o22seh.apps.googleusercontent.com",
+              "client_id": "31550064791-lb744pc021qdkuk71f7opvpq7d16sorm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

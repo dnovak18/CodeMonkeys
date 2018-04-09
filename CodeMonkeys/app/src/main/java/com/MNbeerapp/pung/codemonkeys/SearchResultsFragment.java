@@ -103,6 +103,7 @@ public class SearchResultsFragment extends Fragment {
             find = "SELECT brewery_name, brewery_address, brewery_city,brewery_state,brewery_zip, beer_type, beer_name, brewery_phone, brewery_email, brewery_website FROM brewery_table inner join beer_table ON brewery_table.brewery_ID = beer_table.brewery_ID where ";
             if(!breweryName.isEmpty()){
                 breweryName = breweryName.replace("'", "''");
+                breweryName = breweryName.trim();
                 find+="brewery_name LIKE '%"+breweryName+"%'";
                 if(count>1){
                     find+=" and ";
@@ -110,6 +111,7 @@ public class SearchResultsFragment extends Fragment {
                 }
             }
             if(!breweryZip.isEmpty()){
+                breweryZip = breweryZip.trim();
                 find+="brewery_zip LIKE '"+breweryZip+"%'";
                 if(count>1){
                     find+=" and ";
@@ -127,9 +129,13 @@ public class SearchResultsFragment extends Fragment {
 
                     find += "brewery_city LIKE '%St. Louis Park%'";
 
-                }else if(breweryCity.contains("Saint P")||breweryCity.contains("Saint p")||breweryCity.contains("Saint P")||breweryCity.contains("Saint p")){
+                }else if(breweryCity.contains("Saint P")||breweryCity.contains("Saint p")||breweryCity.contains("saint P")||breweryCity.contains("saint p")){
 
                     find += "brewery_city LIKE '%St. Paul%'";
+
+                }else if(breweryCity.contains("Saint J")||breweryCity.contains("Saint j")||breweryCity.contains("saint J")||breweryCity.contains("saint j")){
+
+                    find += "brewery_city LIKE '%St. Joseph%'";
 
                 }else{
 
@@ -141,6 +147,7 @@ public class SearchResultsFragment extends Fragment {
                 }
             }
             if(!beerType.isEmpty()){
+                beerType = beerType.trim();
                 find+="beer_type LIKE '%"+beerType+"%'";
                 if(count>1){
                     find+=" and ";
@@ -149,7 +156,7 @@ public class SearchResultsFragment extends Fragment {
             }
             if(!beerName.isEmpty()){
                 beerName = beerName.replace("'","''");
-
+                beerName = beerName.trim();
                     find += "beer_name LIKE '%" + beerName + "%'";
                 if(count>1){
                     find+=" and ";
