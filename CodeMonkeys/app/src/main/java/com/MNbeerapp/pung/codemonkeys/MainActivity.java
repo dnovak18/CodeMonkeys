@@ -97,11 +97,12 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.profile:
-                        //LoginFragment loginFragment = new LoginFragment();
-                        //loginFragment.onPause();
-                        //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  LoginFragment()).addToBackStack(null).commit();
-                       Intent profileClick = new Intent(MainActivity.this, FirebaseLogin.class);
-                         startActivity(profileClick);
+                        LoginFragment loginFragment = new LoginFragment();
+                        FirebaseLoginFragment firebaseLoginFragment = new FirebaseLoginFragment();
+                        firebaseLoginFragment.onPause();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  FirebaseLoginFragment()).addToBackStack(null).commit();
+//                       Intent profileClick = new Intent(MainActivity.this, FirebaseLogin.class);
+//                         startActivity(profileClick);
                         return true;
                 }
                 return false;

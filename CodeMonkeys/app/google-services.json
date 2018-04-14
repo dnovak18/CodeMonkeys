@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "31550064791-1btrblbf0g2lnfmfk2f356vnb01qiqnp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.MNbeerapp.pung.codemonkeys",
+            "certificate_hash": "58aa091e939650d6158957bafc51ce68a195e51e"
+          }
+        },
+        {
           "client_id": "31550064791-risqnk1kku8eaj4obpc7soqpljbs536a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
