@@ -1,6 +1,7 @@
 package com.MNbeerapp.pung.codemonkeys;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -217,6 +218,9 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
         getBreweryResult();
         FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
         beerDetailList = (ListView)view.findViewById(R.id.beer_name_detail);
+
+        final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+
         adapterBeer = new SearchDetailAdapter(getActivity().getApplicationContext(), detailBeerList,fragmentManager);
        // Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
         beerDetailList.setAdapter(adapterBeer);
@@ -396,6 +400,7 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onConnected(Bundle bundle) {
 

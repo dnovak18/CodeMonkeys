@@ -1,9 +1,11 @@
 package com.MNbeerapp.pung.codemonkeys;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -45,6 +47,7 @@ public class DetailsListAdapter extends BaseAdapter{
         TextView type = (TextView)v.findViewById(R.id.beerType_textView);
         TextView abv = (TextView)v.findViewById(R.id.beerABV_textView);
 
+
         //Set text for TextView
        // beerName.setText(detailProductList.get(position).getName());
         beerName.setText(String.valueOf(detailProductList.get(position).getBeerName()));
@@ -55,5 +58,14 @@ public class DetailsListAdapter extends BaseAdapter{
         v.setTag(detailProductList.get(position));
 
         return v;
+    }
+
+    private RatingBar.OnRatingBarChangeListener onRatingChangedListner(final RecyclerView.ViewHolder holder, final int position){
+        return new RatingBar.OnRatingBarChangeListener(){
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b){
+
+            }
+        };
     }
 }
