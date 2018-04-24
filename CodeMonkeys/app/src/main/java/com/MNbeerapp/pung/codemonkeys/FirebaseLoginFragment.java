@@ -175,4 +175,32 @@ public class FirebaseLoginFragment extends Fragment  {
             Glide.with(this).clear(profilePic);
         }
     }
+    @Override
+    public void onStop(){
+        if (googleApiClient != null && googleApiClient.isConnected()){
+            googleApiClient.disconnect();
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        googleApiClient.stopAutoManage(getActivity());
+        googleApiClient.connect();
+    }
+
+    @Override
+    public void onStart(){
+      super.onStart();
+      if(googleApiClient != null){
+          googleApiClient.connect();
+      }
+      GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
+      if(account != null){
+          firebaseAuthWithGoogle(account);
+      }
+      else
+          updateUI(null);
+    }
 }

@@ -246,6 +246,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         if (googleApiClient != null && googleApiClient.isConnected()) {
             googleApiClient.disconnect();
             Toast.makeText(getActivity(), "login onStop", Toast.LENGTH_LONG).show();
+
         }
         super.onStop();
     }
