@@ -2,6 +2,7 @@ package com.MNbeerapp.pung.codemonkeys;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -111,6 +112,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by prath on 3/24/2018.
  */
@@ -155,7 +158,7 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
      * {@link #onRequestPermissionsResult(int, String[], int[])}.
      */
     private boolean mPermissionDenied = false;
-
+    RatingBar ratingBar;
     public DetailViewFragment() {
         // Required empty public constructor
     }
@@ -217,6 +220,16 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
         getBreweryResult();
         FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
         beerDetailList = (ListView)view.findViewById(R.id.beer_name_detail);
+
+        ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+
+       // ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+         //   @Override
+           // public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+             //   ratingBar.setNumStars((int) ratingBar.getRating());
+            //}
+        //});
+
         adapterBeer = new SearchDetailAdapter(getActivity().getApplicationContext(), detailBeerList,fragmentManager);
        // Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
         beerDetailList.setAdapter(adapterBeer);
@@ -244,9 +257,11 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
         mapView.getMapAsync(this);
 
 
+
         return view;
 
     }
+
 
     public void getBreweryResult(){
         String beerName = null;
