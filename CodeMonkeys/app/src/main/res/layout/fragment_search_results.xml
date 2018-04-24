@@ -20,7 +20,7 @@
         android:clickable="false"
         android:gravity="center"
         android:paddingBottom="20dp"
-        android:text="Search Result"
+        android:text="Beer Search Result"
         android:textSize="30sp"
         android:textStyle="bold" />
 

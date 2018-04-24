@@ -70,11 +70,8 @@ public class SearchListAdapter extends BaseAdapter {
         bundle.putString("breweryPhone", String.valueOf(mProductList.get(position).getPhone()));
         bundle.putString("breweryEmail", String.valueOf(mProductList.get(position).getEmail()));
         bundle.putString("breweryWebsite", String.valueOf(mProductList.get(position).getWebsite()));
-        //bundle.putString("breweryCity", breweryCityText);
-       //bundle.putString("beerType", beerTypeText);
-       // bundle.putString("beerName", beerNameText);
 
-        breweryName.setOnClickListener(new View.OnClickListener() {
+        beerName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

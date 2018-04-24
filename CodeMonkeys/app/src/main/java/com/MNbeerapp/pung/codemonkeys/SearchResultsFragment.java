@@ -169,13 +169,13 @@ public class SearchResultsFragment extends Fragment {
         Cursor cursor = db.rawQuery(find,null);
         if(cursor.moveToFirst()){
 
-            breweryNameResult = cursor.getString(0);
+            breweryNameResult = "Brewery: "+cursor.getString(0);
             breweryAddress = cursor.getString(1);
             breweryAddress += " "+cursor.getString(2)+",";
             breweryAddress += " "+cursor.getString(3);
             breweryAddress += " "+cursor.getString(4);
             beerInfo = "Beer Type: "+cursor.getString(5);
-            beerNameResult = "Beer Name: "+cursor.getString(6);
+            beerNameResult = cursor.getString(6);
             phoneResult = cursor.getString(7);
             emailResult = cursor.getString(8);
             websiteResult = cursor.getString(9);
@@ -188,7 +188,7 @@ public class SearchResultsFragment extends Fragment {
                 breweryAddress += " "+cursor.getString(3);
                 breweryAddress += " "+cursor.getString(4);
                 beerInfo = "Beer Type: "+cursor.getString(5);
-                beerNameResult = "Beer Name: "+cursor.getString(6);
+                beerNameResult = cursor.getString(6);
                 phoneResult = cursor.getString(7);
                 emailResult = cursor.getString(8);
                 websiteResult = cursor.getString(9);

@@ -126,9 +126,6 @@ public class SearchFragment extends Fragment {
               SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
               searchResultsFragment.setArguments(bundle);
 
-
-
-
               fragmentTransaction.replace(R.id.activity_main, searchResultsFragment);
               fragmentTransaction.commit();
 

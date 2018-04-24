@@ -54,7 +54,6 @@ public class SearchDetailAdapter extends BaseAdapter {
         beerTypeDetail.setText(deatilBeerList.get(position).getBeerType());
         beerNameDetail.setText(deatilBeerList.get(position).getBeerName());
         beerAbvDetail.setText(deatilBeerList.get(position).getABV());
-        //Toast.makeText(mContext, beerTypeDetail.toString(), Toast.LENGTH_LONG).show();
 
 
 

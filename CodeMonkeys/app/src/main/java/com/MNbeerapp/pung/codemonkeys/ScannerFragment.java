@@ -185,8 +185,8 @@ public class ScannerFragment extends Fragment implements ZXingScannerView.Result
 
             brewery = cursor.getString(0);
             address = cursor.getString(1);
-            address += cursor.getString(2);
-            address += cursor.getString(3);
+            address += cursor.getString(2)+" ";
+            address += cursor.getString(3)+" ";
             address += cursor.getString(4);
             phone = cursor.getString(5);
             email = cursor.getString(6);
