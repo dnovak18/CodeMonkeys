@@ -60,12 +60,4 @@ public class DetailsListAdapter extends BaseAdapter{
         return v;
     }
 
-    private RatingBar.OnRatingBarChangeListener onRatingChangedListner(final RecyclerView.ViewHolder holder, final int position){
-        return new RatingBar.OnRatingBarChangeListener(){
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b){
-
-            }
-        };
-    }
 }
