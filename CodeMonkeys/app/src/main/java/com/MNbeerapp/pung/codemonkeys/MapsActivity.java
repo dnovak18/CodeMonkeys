@@ -290,12 +290,13 @@ public class MapsActivity extends AppCompatActivity implements
         Button btnBreweries = (Button) findViewById(R.id.btnBreweries);
         btnBreweries.performClick();
     }
-
+/*
     private void reCenter(){
         final SupportMapFragment smf = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         smf.getView().findViewById(0x2).performClick();
     }
+    */
     /*
     private void showBreweries(View v){
         mMap.clear();
@@ -399,7 +400,7 @@ public class MapsActivity extends AppCompatActivity implements
         }
         Log.d("onLocationChanged", "Exit");
         showBreweries();
-        reCenter();
+        //reCenter();
         //latLng = new LatLng(location.getLatitude(), location.getLongitude());
         //mMap.getCameraPosition();
 

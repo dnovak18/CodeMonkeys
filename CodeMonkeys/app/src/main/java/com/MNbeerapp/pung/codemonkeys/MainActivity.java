@@ -90,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.search:
                         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  SearchFragment()).addToBackStack(null).commit();
                         return true;
+/*
+                    case R.id.map:
+
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  MapsFragment()).addToBackStack(null).commit();
+                        return true;
+                        */
 
                     case R.id.map:
                         Intent mapClick = new Intent(MainActivity.this, MapsActivity.class);

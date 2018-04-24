@@ -222,7 +222,7 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
         final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
 
         adapterBeer = new SearchDetailAdapter(getActivity().getApplicationContext(), detailBeerList,fragmentManager);
-       // Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
         beerDetailList.setAdapter(adapterBeer);
 
         ViewGroup headerView = (ViewGroup)getLayoutInflater().inflate(R.layout.detail_header, null);

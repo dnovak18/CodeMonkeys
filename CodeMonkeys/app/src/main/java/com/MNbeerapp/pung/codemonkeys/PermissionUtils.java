@@ -21,18 +21,18 @@
 
 package com.MNbeerapp.pung.codemonkeys;
 
-        import android.Manifest;
-        import android.app.AlertDialog;
-        import android.app.Dialog;
-        import android.app.Fragment;
-        import android.content.DialogInterface;
-        import android.content.pm.PackageManager;
-        import android.os.Bundle;
-        import android.support.v4.app.ActivityCompat;
-        import android.support.v4.app.DialogFragment;
-        import android.support.v4.app.FragmentActivity;
-        import android.support.v7.app.AppCompatActivity;
-        import android.widget.Toast;
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 /**
  * Utility class for access to runtime permissions.
@@ -46,7 +46,7 @@ public abstract class PermissionUtils {
     String location_permission_denied = "Permission denied";
 
     //public static void requestPermission(AppCompatActivity activity, int requestId,
-                //                         String permission, boolean finishActivity) {
+    //                         String permission, boolean finishActivity) {
     public static void requestPermission(FragmentActivity activity, int requestId,
                                          String permission, boolean finishActivity) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
@@ -102,7 +102,7 @@ public abstract class PermissionUtils {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             mFinishActivity = getArguments().getBoolean(ARGUMENT_FINISH_ACTIVITY);
-          //  String location_permission_denied = "Permission denied";
+            //  String location_permission_denied = "Permission denied";
 
             return new AlertDialog.Builder(getActivity())
                     .setMessage(R.string.location_permission_denied)
@@ -194,4 +194,3 @@ public abstract class PermissionUtils {
         }
     }
 }
-
