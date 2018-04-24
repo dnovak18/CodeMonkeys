@@ -1,6 +1,7 @@
 package com.MNbeerapp.pung.codemonkeys;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -411,10 +412,10 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
 
     }
 
+
     @Override
     public void onConnected(Bundle bundle) {
 
-        mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
