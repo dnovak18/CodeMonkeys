@@ -169,7 +169,7 @@ public class SearchResultsFragment extends Fragment {
         Cursor cursor = db.rawQuery(find,null);
         if(cursor.moveToFirst()){
 
-            breweryNameResult = "Brewery: "+cursor.getString(0);
+            breweryNameResult = cursor.getString(0);
             breweryAddress = cursor.getString(1);
             breweryAddress += " "+cursor.getString(2)+",";
             breweryAddress += " "+cursor.getString(3);
