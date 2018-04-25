@@ -388,8 +388,8 @@ public class MapsActivity extends AppCompatActivity implements
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-        Toast.makeText(MapsActivity.this,"Your Current Location", Toast.LENGTH_LONG).show();
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+        //Toast.makeText(MapsActivity.this,"Your Current Location", Toast.LENGTH_LONG).show();
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
 
@@ -447,14 +447,14 @@ public class MapsActivity extends AppCompatActivity implements
 
     //@Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
     }
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
