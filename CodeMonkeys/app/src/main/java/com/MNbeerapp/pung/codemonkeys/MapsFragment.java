@@ -1,92 +1,41 @@
 package com.MNbeerapp.pung.codemonkeys;
 
-import android.app.Fragment;
-import android.content.Intent;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import android.support.v7.widget.Toolbar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.location.places.*;
 import com.google.android.gms.maps.model.MarkerOptions;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-
-import java.nio.file.AccessDeniedException;
-import java.util.ArrayList;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-
 import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-//import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
+import android.annotation.SuppressLint;
 
-//public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-//  public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-//  }
-public class MapsFragment extends Fragment implements
+public class MapsFragment extends android.support.v4.app.Fragment implements
         GoogleMap.OnMyLocationClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,  GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -102,7 +51,7 @@ public class MapsFragment extends Fragment implements
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-    MapView mapView;
+
     /**
      * Request code for location permission request.
      *
@@ -115,97 +64,43 @@ public class MapsFragment extends Fragment implements
      * {@link #onRequestPermissionsResult(int, String[], int[])}.
      */
     private boolean mPermissionDenied = false;
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.setting_menu_items, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+    private Activity view;
+
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.login:
-                Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.about:
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
-                break;
-            default:
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.fragment_maps, container, false);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            checkLocationPermission();
         }
-        return super.onOptionsItemSelected(item);
-    }
-*/
-public MapsFragment() {
-    // Required empty public constructor
-}
-
-@Override
-public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        checkLocationPermission();
-    }
-
-    //Check if Google Play Services Available or not
-    if (!CheckGooglePlayServices()) {
-        Log.d("onCreate", "Finishing test case since Google Play Services are not available");
-        getActivity().finish();
-    }
-    else {
-        Log.d("onCreate","Google Play Services available.");
-    }
-
-}
-/*
-
-    public void scanClick(MenuItem item) {
-        // Intent scanClick = new Intent(MainActivity.this, ScanActivity.class);
-        // startActivity(scanClick);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ScannerFragment()).addToBackStack(null).commit();
+        return view;
     }
 
 
-
-    public void searchClick(MenuItem item) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  SearchFragment()).addToBackStack(null).commit();
-
-    }
-    public void mapClick(MenuItem item) {
-        Intent mapClick = new Intent(getActivity(), MapsActivity.class);
-        startActivity(mapClick);
-    }
-
-    public void profileClick(MenuItem item) {
-//        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
-        Intent profileClick = new Intent(getActivity(), LoginActivity.class);
-        startActivity(profileClick);
-    }
-
-    */
     public void infoClick(View view) {
 
-        Toast toast = Toast.makeText(getActivity(), "Cheeeeers!", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this.getActivity(), "Cheeeeers!", Toast.LENGTH_SHORT);
         TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
         v.setTextColor(Color.RED);
         v.setTextSize(40);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
 
-        //Toast.makeText(MainActivity.this, "Cheeeeers!", Toast.LENGTH_LONG).show();
-
-
     }
 
     private boolean CheckGooglePlayServices() {
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
-        int result = googleAPI.isGooglePlayServicesAvailable(getActivity());
+        int result = googleAPI.isGooglePlayServicesAvailable(this.getActivity());
         if(result != ConnectionResult.SUCCESS) {
             if(googleAPI.isUserResolvableError(result)) {
-                googleAPI.getErrorDialog(getActivity(), result,
+                googleAPI.getErrorDialog(this.getActivity(), result,
                         0).show();
             }
             return false;
@@ -213,55 +108,7 @@ public void onCreate(Bundle savedInstanceState) {
         return true;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_detail_view, container, false);
-
-        //map = mapView.getMap();
-
-        // map.getUiSettings().setMyLocationButtonEnabled(false);
-        //mMap.setMyLocationEnabled(true);
-
-        Bundle bundle = getArguments();
-        Button btnBreweries2 = (Button) view.findViewById(R.id.btnBreweries2);
-        ViewGroup headerView = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            headerView = (ViewGroup)getLayoutInflater().inflate(R.layout.detail_header, null);
-        }
-
-        mapView = (MapView) headerView.findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
-
-        btnBreweries2.setOnClickListener(new View.OnClickListener() {
-            String Brewery = "brewery";
-            @Override
-            public void onClick(View v) {
-                Log.d("onClick", "Button is Clicked");
-                mMap.clear();
-
-                String url = getUrl(latitude, longitude, Brewery);
-                Object[] DataTransfer = new Object[2];
-                DataTransfer[0] = mMap;
-                DataTransfer[1] = url;
-                Log.d("onClick", url);
-                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                getNearbyPlacesData.execute(DataTransfer);
-
-                Toast.makeText(getActivity(),"Nearby Breweries", Toast.LENGTH_LONG).show();
-            }
-
-
-        });
-
-
-        //showBreweries();
-
-        return view;
-
-    }
 
     /*
     /**
@@ -279,15 +126,9 @@ public void onCreate(Bundle savedInstanceState) {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         // Set the camera to the greatest possible zoom level that includes the
         // bounds
-        //  LatLngBounds MINNESOTA = new LatLngBounds(new LatLng(42.5, -97.9), new LatLng(51.1, -89.5));
-        //  mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(MINNESOTA, 10));
-
-
-        // LatLng msp = new LatLng(44.95, -93.2);
-
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (ContextCompat.checkSelfPermission(getActivity(),
+            if (ContextCompat.checkSelfPermission(this.getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
@@ -301,10 +142,9 @@ public void onCreate(Bundle savedInstanceState) {
 
 
 
-        //Button btnBreweries = (Button) findViewById(R.id.btnBreweries);
-       // Button btnBreweries2 = (Button) findViewById(R.id.btnBreweries2);
-        /*
-        btnBreweries2.setOnClickListener(new View.OnClickListener() {
+        Button btnBreweries = (Button) view.findViewById(R.id.btnBreweries2);
+
+        btnBreweries.setOnClickListener(new View.OnClickListener() {
             String Brewery = "brewery";
             @Override
             public void onClick(View v) {
@@ -319,57 +159,26 @@ public void onCreate(Bundle savedInstanceState) {
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
 
-                Toast.makeText(getActivity(),"Nearby Breweries", Toast.LENGTH_LONG).show();
             }
-
-
         });
-*/
 
-        //mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         enableMyLocation();
-
-        // Add a marker in MSP and move the camera
-        // mMap.addMarker(new MarkerOptions().position(msp).title("Marker in MSP"));
-
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(msp));
-
     }
-    /*
     private void showBreweries(){
-        Button btnBreweries = (Button) findViewById(R.id.btnBreweries2);
+        Button btnBreweries = (Button) view.findViewById(R.id.btnBreweries2);
         btnBreweries.performClick();
     }
-    */
-/*
-    private void reCenter(){
-        final SupportMapFragment smf = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        smf.getView().findViewById(0x2).performClick();
-    }
-    */
-    /*
-    private void showBreweries(View v){
-        mMap.clear();
-        String url = getUrl(latitude, longitude, "brewery");
-        Object[] DataTransfer = new Object[2];
-        DataTransfer[0] = mMap;
-        DataTransfer[1] = url;
-        Log.d("onClick", url);
-        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-        getNearbyPlacesData.execute(DataTransfer);
-    }
-*/
+
     /**
      * Enables the My Location layer if the fine location permission has been granted.
      */
     private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission to access the location is missing.
-            //PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-              //      Manifest.permission.ACCESS_FINE_LOCATION, true);
+            PermissionUtils.requestPermission((FragmentActivity) this.getActivity(), LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
@@ -377,7 +186,7 @@ public void onCreate(Bundle savedInstanceState) {
     }
 
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -385,13 +194,14 @@ public void onCreate(Bundle savedInstanceState) {
         mGoogleApiClient.connect();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(getActivity(),
+        if (ContextCompat.checkSelfPermission(this.getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -403,14 +213,12 @@ public void onCreate(Bundle savedInstanceState) {
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
 
         googlePlacesUrl.append("location=" + latitude + "," + longitude);
-        //googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
+
         googlePlacesUrl.append("&radius=" + 10000);
         googlePlacesUrl.append("&keyword=" + "brewery");
-        // googlePlacesUrl.append("&type=" + nearbyPlace);
-        //googlePlacesUrl.append("&type=" + "brewery");
-        //googlePlacesUrl.append("&sensor=true");
+
         googlePlacesUrl.append("&key=" + "AIzaSyA3R1xKAFLatmjQqUA1-dG4GPgMaZPOxcE");
-        Log.d("getUrl", googlePlacesUrl.toString());
+
         return (googlePlacesUrl.toString());
     }
 
@@ -421,7 +229,6 @@ public void onCreate(Bundle savedInstanceState) {
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d("onLocationChanged", "entered");
 
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
@@ -440,8 +247,8 @@ public void onCreate(Bundle savedInstanceState) {
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-       // Toast.makeText(MapsActivity.this,"Your Current Location", Toast.LENGTH_LONG).show();
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
 
@@ -451,13 +258,8 @@ public void onCreate(Bundle savedInstanceState) {
             Log.d("onLocationChanged", "Removing Location Updates");
         }
         Log.d("onLocationChanged", "Exit");
-        //showBreweries();
-        //reCenter();
-        //latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        //mMap.getCameraPosition();
+        showBreweries();
 
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
     }
 
     @Override
@@ -467,12 +269,12 @@ public void onCreate(Bundle savedInstanceState) {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
-        if (ContextCompat.checkSelfPermission(getActivity(),
+        if (ContextCompat.checkSelfPermission(this.getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Asking user if explanation is needed
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this.getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -480,14 +282,14 @@ public void onCreate(Bundle savedInstanceState) {
                 // sees the explanation, try again to request the permission.
 
                 //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(getActivity(),
+                ActivityCompat.requestPermissions(this.getActivity(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
 
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(getActivity(),
+                ActivityCompat.requestPermissions(this.getActivity(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
@@ -499,14 +301,12 @@ public void onCreate(Bundle savedInstanceState) {
 
     //@Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(getActivity(), "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
+
         return false;
     }
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(getActivity(), "Current location:\n" + location, Toast.LENGTH_LONG).show();
+
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -524,24 +324,4 @@ public void onCreate(Bundle savedInstanceState) {
             mPermissionDenied = true;
         }
     }
-    /*
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        if (mPermissionDenied) {
-            // Permission was not granted, display error dialog.
-            showMissingPermissionError();
-            mPermissionDenied = false;
-        }
-    }
-
-
-     // Displays a dialog with error message explaining that the location permission is missing.
-
-    private void showMissingPermissionError() {
-        PermissionUtils.PermissionDeniedDialog
-                .newInstance(true).show(getSupportFragmentManager(), "dialog");
-    }
-    */
-
 }

@@ -18,8 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.io.IOException;
 
 
@@ -42,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.login:
-                Intent intent = new Intent(MainActivity.this, FirebaseLogin.class);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new FirebaseLoginFragment()).addToBackStack(null).commit();
                 break;
+
             case R.id.about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
                 break;
@@ -76,8 +74,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         menuView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
-        // uncomment we don't want animation menu shifting
-        //BottomNavigationViewHelper.removeShiftMode(menuView);
+
         menuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected( MenuItem item) {
@@ -90,24 +87,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.search:
                         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  SearchFragment()).addToBackStack(null).commit();
                         return true;
-/*
-                    case R.id.map:
-
-                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  MapsFragment()).addToBackStack(null).commit();
-                        return true;
-                        */
 
                     case R.id.map:
-                        Intent mapClick = new Intent(MainActivity.this, MapsActivity.class);
-                        startActivity(mapClick);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MapsFragment()).addToBackStack(null).commit();
                         return true;
 
                     case R.id.profile:
-                        LoginFragment loginFragment = new LoginFragment();
                         FirebaseLoginFragment firebaseLoginFragment = new FirebaseLoginFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  FirebaseLoginFragment()).addToBackStack(null).commit();
-//                       Intent profileClick = new Intent(MainActivity.this, FirebaseLogin.class);
-//                         startActivity(profileClick);
+
                         return true;
                 }
                 return false;
