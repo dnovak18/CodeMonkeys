@@ -2,6 +2,8 @@ package com.MNbeerapp.pung.codemonkeys;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +56,7 @@ public class FirebaseLoginFragment extends Fragment  {
     private TextView Name, Email;
     private Button signOutButton;
     private ConstraintLayout profile_Section;
+    private EditText box;
     //FirebaseAuth.AuthStateListener mAuthListener;
     private static final int RC_SIGN_IN = 4001;
 
@@ -76,6 +80,7 @@ public class FirebaseLoginFragment extends Fragment  {
         Email = (TextView)view.findViewById(R.id.userEmail);
         loginButton = (SignInButton)view.findViewById(R.id.sign_in_button);
         signOutButton = (Button)view.findViewById(R.id.logoutButton);
+        box = (EditText)view.findViewById(R.id.plain_text_input);
         mAuth = FirebaseAuth.getInstance();
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +129,7 @@ public class FirebaseLoginFragment extends Fragment  {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(getActivity(), "Authentication Failed",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Authentication Failed",Toast.LENGTH_SHORT).show();
                 // ...
             }
         }
@@ -147,7 +152,7 @@ public class FirebaseLoginFragment extends Fragment  {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Snackbar.make(getView().findViewById(R.id.profileSection ), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+                            //Snackbar.make(getView().findViewById(R.id.profileSection ), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                             updateUI(null);
                         }
 
