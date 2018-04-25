@@ -46,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
                 break;
+
                 case R.id.privacy:
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://sites.google.com/view/minnesota-drink-together/home")));
-            default:
+
+                    default:
         }
         return super.onOptionsItemSelected(item);
     }

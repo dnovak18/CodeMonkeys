@@ -128,7 +128,7 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
         // bounds
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (ContextCompat.checkSelfPermission(this.getActivity(),
+            if (ContextCompat.checkSelfPermission(getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
@@ -148,14 +148,14 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
             String Brewery = "brewery";
             @Override
             public void onClick(View v) {
-                Log.d("onClick", "Button is Clicked");
+
                 mMap.clear();
 
                 String url = getUrl(latitude, longitude, Brewery);
                 Object[] DataTransfer = new Object[2];
                 DataTransfer[0] = mMap;
                 DataTransfer[1] = url;
-                Log.d("onClick", url);
+
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
 
@@ -174,10 +174,10 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
      * Enables the My Location layer if the fine location permission has been granted.
      */
     private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission to access the location is missing.
-            PermissionUtils.requestPermission((FragmentActivity) this.getActivity(), LOCATION_PERMISSION_REQUEST_CODE,
+            PermissionUtils.requestPermission((FragmentActivity) getActivity(), LOCATION_PERMISSION_REQUEST_CODE,
                     Manifest.permission.ACCESS_FINE_LOCATION, true);
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
@@ -186,7 +186,7 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
     }
 
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity())
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -201,7 +201,7 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(this.getActivity(),
+        if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -250,14 +250,12 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
 
 
-        Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
-
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
             Log.d("onLocationChanged", "Removing Location Updates");
         }
-        Log.d("onLocationChanged", "Exit");
+
         showBreweries();
 
     }
@@ -269,12 +267,12 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
-        if (ContextCompat.checkSelfPermission(this.getActivity(),
+        if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Asking user if explanation is needed
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this.getActivity(),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
