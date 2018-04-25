@@ -55,14 +55,6 @@
             android:name=".ScanActivity"
             android:label="@string/title_activity_scan"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
-        <activity android:name=".FirebaseLogin"
-            android:label="FireBaseLogin">
-
-        </activity>
 
     </application>
 

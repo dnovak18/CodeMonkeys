@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.login:
-                Intent intent = new Intent(MainActivity.this, FirebaseLogin.class);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new FirebaseLoginFragment()).addToBackStack(null).commit();
                 break;
             case R.id.about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new AboutDeveloperFragment()).addToBackStack(null).commit();
@@ -97,11 +96,10 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.profile:
-                        //LoginFragment loginFragment = new LoginFragment();
-                        //loginFragment.onPause();
-                        //getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  LoginFragment()).addToBackStack(null).commit();
-                       Intent profileClick = new Intent(MainActivity.this, FirebaseLogin.class);
-                         startActivity(profileClick);
+                        FirebaseLoginFragment firebaseLoginFragment = new FirebaseLoginFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new  FirebaseLoginFragment()).addToBackStack(null).commit();
+//                       Intent profileClick = new Intent(MainActivity.this, FirebaseLogin.class);
+//                         startActivity(profileClick);
                         return true;
                 }
                 return false;

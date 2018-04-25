@@ -1,5 +1,6 @@
 package com.MNbeerapp.pung.codemonkeys;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -120,7 +121,7 @@ public class MapsActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.login:
-                Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MapsActivity.this, FirebaseLoginFragment.class);
                 startActivity(intent);
                 break;
             case R.id.about:
@@ -182,7 +183,7 @@ public class MapsActivity extends AppCompatActivity implements
 
     public void profileClick(MenuItem item) {
 //        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new MyProfileFragment()).addToBackStack(null).commit();
-        Intent profileClick = new Intent(MapsActivity.this, LoginActivity.class);
+        Intent profileClick = new Intent(MapsActivity.this, FirebaseLoginFragment.class);
         startActivity(profileClick);
     }
     public void infoClick(View view) {
@@ -332,6 +333,7 @@ public class MapsActivity extends AppCompatActivity implements
         mGoogleApiClient.connect();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
