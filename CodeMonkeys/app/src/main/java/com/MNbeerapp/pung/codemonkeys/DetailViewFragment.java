@@ -219,7 +219,7 @@ public class DetailViewFragment extends Fragment implements OnMapReadyCallback,G
         FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
         beerDetailList = (ListView)view.findViewById(R.id.beer_name_detail);
 
-        final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+       // final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
 
         adapterBeer = new SearchDetailAdapter(getActivity().getApplicationContext(), detailBeerList,fragmentManager);
         beerDetailList.setAdapter(adapterBeer);
