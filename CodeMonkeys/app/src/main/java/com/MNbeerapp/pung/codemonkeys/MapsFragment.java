@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -64,12 +65,13 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
      * {@link #onRequestPermissionsResult(int, String[], int[])}.
      */
     private boolean mPermissionDenied = false;
-    private Activity view;
+    private FragmentActivity view;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -80,6 +82,11 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             checkLocationPermission();
         }
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
         return view;
     }
 
@@ -142,7 +149,7 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
 
 
 
-        Button btnBreweries = (Button) view.findViewById(R.id.btnBreweries2);
+        Button btnBreweries = (Button) getView().findViewById(R.id.btnBreweries2);
 
         btnBreweries.setOnClickListener(new View.OnClickListener() {
             String Brewery = "brewery";
@@ -166,7 +173,7 @@ public class MapsFragment extends android.support.v4.app.Fragment implements
         enableMyLocation();
     }
     private void showBreweries(){
-        Button btnBreweries = (Button) view.findViewById(R.id.btnBreweries2);
+        Button btnBreweries = (Button) getView().findViewById(R.id.btnBreweries2);
         btnBreweries.performClick();
     }
 
