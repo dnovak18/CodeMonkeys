@@ -36,7 +36,7 @@
             android:layout_toRightOf="@+id/imageButton"
             android:gravity="center"
             android:layout_marginLeft="20dp"
-            android:text="The Great Minnesota Drink Together"
+            android:text="MN Drink Together"
             android:textColor="@android:color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
