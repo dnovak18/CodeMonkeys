@@ -25,7 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchTextView"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textAutoCorrect"
+        android:imeOptions="actionDone"
         android:paddingBottom="20dp"
         android:hint="Brewery Name"
         android:text="" />
@@ -36,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/breweryNameEditText"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textAutoCorrect"
+        android:imeOptions="actionDone"
         android:paddingBottom="20dp"
         android:hint="Brewery Zip"
         android:text="" />
@@ -47,7 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/breweryZipEditText"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textAutoCorrect"
+        android:imeOptions="actionDone"
         android:paddingBottom="20dp"
         android:hint="Brewery City"
         android:text="" />
@@ -58,7 +61,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/breweryCityEditText"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textAutoCorrect"
+        android:imeOptions="actionDone"
         android:paddingBottom="20dp"
         android:hint="Beer Type"
         android:text="" />
@@ -69,7 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/beerTypeEditText"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textAutoCorrect"
+        android:imeOptions="actionDone"
         android:paddingBottom="20dp"
         android:hint="Beer Name"
         android:text="" />
