@@ -1,6 +1,5 @@
 package com.MNbeerapp.pung.codemonkeys;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
